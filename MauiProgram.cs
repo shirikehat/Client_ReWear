@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Client_ReWear.ViewModels;
+using Client_ReWear.Views;
+using Microsoft.Extensions.Logging;
 
 namespace Client_ReWear
 {
@@ -15,8 +17,10 @@ namespace Client_ReWear
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddSingleton<Login>();
+            builder.Services.AddSingleton<LoginViewModel>();
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

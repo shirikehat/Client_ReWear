@@ -3,10 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Client_ReWear.Views.Login"
              Title="Login">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+        <Label
+                FontSize="50"
+                HorizontalOptions="Center"
+                Text="Login page"
+                TextColor="LightBlue"/>
+        <!--FontFamily="SweetHoney"-->
+        
+        <Entry
+                Placeholder="הכנס שם"
+                PlaceholderColor="LightGrey"/>
+        <!--Text="{Binding UserName}"-->
+        
+        <Entry
+                IsPassword="True"
+                Placeholder="הכנס סיסמה"
+                PlaceholderColor="LightGrey"/>
+        <!--Text="{Binding Password}"--> 
+        
+        <HorizontalStackLayout>
+            <Button
+                    Command="{Binding LoginCommand}"
+                    Text="התחבר"
+                    WidthRequest="150" />
+            <Button
+                    Command="{Binding CancelCommand}"
+                    Text="ביטול"
+                    WidthRequest="150" />
+            <Label Text="{Binding Messege}" TextColor="{Binding Color}" />
+
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
