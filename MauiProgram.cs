@@ -15,6 +15,8 @@ namespace Client_ReWear
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("Klhamer.otf", "Klhamer");
+                    fonts.AddFont("felix007-medium-webfont.ttf", "felix");
                 });
 
             builder.Services.AddSingleton<Login>();

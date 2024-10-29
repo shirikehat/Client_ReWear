@@ -8,29 +8,33 @@
                 FontSize="50"
                 HorizontalOptions="Center"
                 Text="Login page"
-                TextColor="LightBlue"/>
-        <!--FontFamily="SweetHoney"-->
-        
+                TextColor="LightPink"
+                FontFamily="Klhamer"/>
+
         <Entry
                 Placeholder="הכנס שם"
-                PlaceholderColor="LightGrey"/>
+                PlaceholderColor="LightGrey"
+            FontFamily="felix"/>
         <!--Text="{Binding UserName}"-->
         
         <Entry
                 IsPassword="True"
                 Placeholder="הכנס סיסמה"
-                PlaceholderColor="LightGrey"/>
+                PlaceholderColor="LightGrey"
+            FontFamily="felix"/>
         <!--Text="{Binding Password}"--> 
         
         <HorizontalStackLayout>
             <Button
                     Command="{Binding LoginCommand}"
                     Text="התחבר"
-                    WidthRequest="150" />
+                    WidthRequest="150"
+                FontFamily="felix"/>
             <Button
                     Command="{Binding CancelCommand}"
                     Text="ביטול"
-                    WidthRequest="150" />
+                    WidthRequest="150" 
+                FontFamily="felix"/>
             <Label Text="{Binding Messege}" TextColor="{Binding Color}" />
 
         </HorizontalStackLayout>
