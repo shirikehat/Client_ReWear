@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client_ReWear.Views.Register"
+             Title="Register">
+    <StackLayout VerticalOptions="FillAndExpand">
+
+        <Label
+        FontSize="50"
+        HorizontalOptions="Center"
+        Text="Register page"
+        TextColor="LightPink"
+        FontFamily="Klhamer"/>
+
+        <ScrollView
+            HorizontalScrollBarVisibility="Always"
+            VerticalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Always">
+
+            <Grid ColumnDefinitions="*,1.5*" RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*">
+
+                <Label
+                    x:Name="name_lbl"
+                    Grid.Column="0"
+                    Margin="15"
+                    Text="שם משתמש"
+                    FontFamily="felix"/>
+
+                <Entry
+                    Grid.Column="1"
+                    Placeholder="הקלד שם משתמש"
+                     FontFamily="felix"
+                     />
+
+                <Label
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Margin="15"
+                    HorizontalOptions="Center"
+                    
+                    TextColor="Red" />
+
+
+                <Label
+                    x:Name="email_lbl"
+                    Grid.Row="3"
+                    Margin="15"
+                    Text="אימייל"
+                     FontFamily="felix"/>
+
+                <Entry
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Keyboard="Email"
+                    Placeholder="הקלד אימייל"
+                     FontFamily="felix"
+                     />
+
+                <Label
+                    x:Name="password_lbl"
+                    Grid.Row="4"
+                    Margin="15"
+                    FlowDirection="RightToLeft"
+                    Text="סיסמא"
+                     FontFamily="felix"/>
+                <Entry
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Keyboard="Chat"
+                    Placeholder="הקלד סיסמא"
+                     FontFamily="felix"
+                     />
+
+                <Label
+                    Grid.Row="5"
+                    Grid.ColumnSpan="2"
+                    HorizontalOptions="Center"
+                    
+                    TextColor="red" />
+
+
+                <Button
+                    Grid.Row="10"
+                    Grid.ColumnSpan="2"
+                     FontFamily="felix"
+                    
+                    Text="המשך" />
+
+            </Grid>
+
+        </ScrollView>
+    </StackLayout>
+
+</ContentPage>

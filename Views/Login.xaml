@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:Client_ReWear.ViewModels"
              x:Class="Client_ReWear.Views.Login"
-             Title="Login">
+             Title="Login"
+             x:DataType="viewmodel:LoginViewModel">
+    
     <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
         <Label
                 FontSize="50"
@@ -31,12 +34,26 @@
                     WidthRequest="150"
                 FontFamily="felix"/>
             <Button
-                    Command="{Binding CancelCommand}"
                     Text="ביטול"
                     WidthRequest="150" 
                 FontFamily="felix"/>
-            <Label Text="{Binding Messege}" TextColor="{Binding Color}" />
+            <!--<Label Text="{Binding Messege}" TextColor="{Binding Color}" />-->
 
         </HorizontalStackLayout>
+
+        <StackLayout Margin="0,25,0,0" HorizontalOptions="Center">
+            <Label Text="אין לך משתמש?" FontFamily="felix" />
+        <Label
+                FontAttributes="Bold"
+                FontFamily="felix"
+            HorizontalOptions="Center"
+                Text="לחץ להרשמה"
+                TextColor="Blue">
+            <!--<Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoToRegisterCommand}" />
+            </Label.GestureRecognizers>-->
+        </Label>
+        </StackLayout>
+        
     </VerticalStackLayout>
 </ContentPage>
