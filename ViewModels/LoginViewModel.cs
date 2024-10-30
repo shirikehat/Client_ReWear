@@ -9,16 +9,16 @@ public class LoginViewModel : ViewModelBase
 
     public ICommand LoginCommand { get; set; }
     public ICommand GoToRegisterCommand { get; set; }
-    private string email;
-    public string Email
+    private string username;
+    public string Username
     {
-        get => email;
+        get => username;
         set
         {
-            if (email != value)
+            if (username != value)
             {
-                email = value;
-                OnPropertyChanged(nameof(Email));
+                username = value;
+                OnPropertyChanged(nameof(Username));
                 // can add more logic here like email validation etc.
                 // can add error message property and set it here
             }

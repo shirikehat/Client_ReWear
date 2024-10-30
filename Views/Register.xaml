@@ -60,7 +60,6 @@
                     x:Name="password_lbl"
                     Grid.Row="4"
                     Margin="15"
-                    FlowDirection="RightToLeft"
                     Text="סיסמא"
                      FontFamily="felix"/>
                 <Entry

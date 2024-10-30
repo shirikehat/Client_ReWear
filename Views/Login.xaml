@@ -17,16 +17,16 @@
         <Entry
                 Placeholder="הכנס שם"
                 PlaceholderColor="LightGrey"
-            FontFamily="felix"/>
-        <!--Text="{Binding UserName}"-->
-        
+            FontFamily="felix"
+        Text="{Binding Username}"/>
+
         <Entry
                 IsPassword="True"
                 Placeholder="הכנס סיסמה"
                 PlaceholderColor="LightGrey"
-            FontFamily="felix"/>
-        <!--Text="{Binding Password}"--> 
-        
+            FontFamily="felix"
+        Text="{Binding Password}" />
+
         <HorizontalStackLayout>
             <Button
                     Command="{Binding LoginCommand}"
@@ -41,17 +41,18 @@
 
         </HorizontalStackLayout>
 
-        <StackLayout Margin="0,25,0,0" HorizontalOptions="Center">
-            <Label Text="אין לך משתמש?" FontFamily="felix" />
+        <StackLayout Margin="0,40,0,0" HorizontalOptions="Center">
+            <Label Text="אין לך משתמש?" FontFamily="felix" FontSize="Medium" />
         <Label
                 FontAttributes="Bold"
+            FontSize="Medium"
                 FontFamily="felix"
             HorizontalOptions="Center"
                 Text="לחץ להרשמה"
                 TextColor="Blue">
-            <!--<Label.GestureRecognizers>
+            <Label.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding GoToRegisterCommand}" />
-            </Label.GestureRecognizers>-->
+            </Label.GestureRecognizers>
         </Label>
         </StackLayout>
         
