@@ -15,21 +15,23 @@
         <ScrollView
             HorizontalScrollBarVisibility="Always"
             VerticalOptions="FillAndExpand"
-            VerticalScrollBarVisibility="Always">
+            VerticalScrollBarVisibility="Always"
+            HorizontalOptions="Center">
 
-            <Grid ColumnDefinitions="*,1.5*" RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*">
+            <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" >
 
                 <Label
                     x:Name="name_lbl"
-                    Grid.Column="0"
+                    Grid.Column="1"
                     Margin="15"
                     Text="שם משתמש"
                     FontFamily="felix"/>
 
                 <Entry
-                    Grid.Column="1"
+                    Grid.Column="0"
                     Placeholder="הקלד שם משתמש"
                      FontFamily="felix"
+                     Text="{Binding Name}"
                      />
 
                 <Label
@@ -37,49 +39,70 @@
                     Grid.ColumnSpan="2"
                     Margin="15"
                     HorizontalOptions="Center"
-                    
+                    FontFamily="felix"
+                    Text="{Binding User_Error}"
                     TextColor="Red" />
 
 
                 <Label
-                    x:Name="email_lbl"
-                    Grid.Row="3"
-                    Margin="15"
-                    Text="אימייל"
-                     FontFamily="felix"/>
+    x:Name="email_lbl"
+    Grid.Row="3"
+                    Grid.Column="1"
+    Margin="15"
+    Text="אימייל"
+     FontFamily="felix"/>
 
                 <Entry
-                    Grid.Row="3"
+    Grid.Row="3"
+    Grid.Column="0"
+    Keyboard="Email"
+    Placeholder="הקלד אימייל"
+     FontFamily="felix"
+     />
+                
+                <Label
+    x:Name="phone_lbl"
+    Grid.Row="4"
                     Grid.Column="1"
-                    Keyboard="Email"
-                    Placeholder="הקלד אימייל"
-                     FontFamily="felix"
-                     />
+    Margin="15"
+    Text="טלפון"
+     FontFamily="felix"/>
+
+                <Entry
+    Grid.Row="4"
+    Grid.Column="0"
+    Keyboard="Telephone"
+    Placeholder="הקלד טלפון"
+     FontFamily="felix"
+     />
 
                 <Label
                     x:Name="password_lbl"
-                    Grid.Row="4"
+                    Grid.Row="5"
+                    Grid.Column="1"
                     Margin="15"
                     Text="סיסמא"
                      FontFamily="felix"/>
                 <Entry
-                    Grid.Row="4"
-                    Grid.Column="1"
+                    Grid.Row="5"
+                    Grid.Column="0"
                     Keyboard="Chat"
                     Placeholder="הקלד סיסמא"
+                    Text="{Binding Password}"
                      FontFamily="felix"
                      />
 
                 <Label
-                    Grid.Row="5"
+                    Grid.Row="6"
                     Grid.ColumnSpan="2"
                     HorizontalOptions="Center"
-                    
+                    Text="{Binding Password_Error}"
+                    FontFamily="felix"
                     TextColor="red" />
 
 
                 <Button
-                    Grid.Row="10"
+                    Grid.Row="7"
                     Grid.ColumnSpan="2"
                      FontFamily="felix"
                     
