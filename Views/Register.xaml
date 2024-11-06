@@ -59,7 +59,7 @@
     Placeholder="הקלד אימייל"
      FontFamily="felix"
      />
-                
+
                 <Label
     x:Name="phone_lbl"
     Grid.Row="4"
