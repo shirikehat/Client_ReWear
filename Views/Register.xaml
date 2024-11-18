@@ -24,13 +24,13 @@
                     x:Name="name_lbl"
                     Grid.Column="1"
                     Margin="15"
-                    Text="שם משתמש"
-                    FontFamily="felix"/>
+                    Text="username"
+                    FontFamily="library"/>
 
                 <Entry
                     Grid.Column="0"
-                    Placeholder="הקלד שם משתמש"
-                     FontFamily="felix"
+                    Placeholder="enter username"
+                     FontFamily="library"
                      Text="{Binding Name}"
                      />
 
@@ -49,15 +49,15 @@
     Grid.Row="3"
                     Grid.Column="1"
     Margin="15"
-    Text="אימייל"
-     FontFamily="felix"/>
+    Text="email"
+     FontFamily="library"/>
 
                 <Entry
     Grid.Row="3"
     Grid.Column="0"
     Keyboard="Email"
-    Placeholder="הקלד אימייל"
-     FontFamily="felix"
+    Placeholder="enter email"
+     FontFamily="library"
      />
 
                 <Label
@@ -65,15 +65,15 @@
     Grid.Row="4"
                     Grid.Column="1"
     Margin="15"
-    Text="טלפון"
-     FontFamily="felix"/>
+    Text="phone"
+     FontFamily="library"/>
 
                 <Entry
     Grid.Row="4"
     Grid.Column="0"
     Keyboard="Telephone"
-    Placeholder="הקלד טלפון"
-     FontFamily="felix"
+    Placeholder="enter phone"
+     FontFamily="library"
      />
 
                 <Label
@@ -81,15 +81,15 @@
                     Grid.Row="5"
                     Grid.Column="1"
                     Margin="15"
-                    Text="סיסמא"
-                     FontFamily="felix"/>
+                    Text="password"
+                     FontFamily="library"/>
                 <Entry
                     Grid.Row="5"
                     Grid.Column="0"
                     Keyboard="Chat"
-                    Placeholder="הקלד סיסמא"
+                    Placeholder="enter password"
                     Text="{Binding Password}"
-                     FontFamily="felix"
+                     FontFamily="library"
                      />
 
                 <Label
@@ -104,9 +104,9 @@
                 <Button
                     Grid.Row="7"
                     Grid.ColumnSpan="2"
-                     FontFamily="felix"
+                     FontFamily="library"
                     
-                    Text="המשך" />
+                    Text="signup" />
 
             </Grid>
 

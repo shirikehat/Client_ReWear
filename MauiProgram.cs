@@ -1,6 +1,8 @@
-﻿using Client_ReWear.ViewModels;
+﻿using Client_ReWear.Services;
+using Client_ReWear.ViewModels;
 using Client_ReWear.Views;
 using Microsoft.Extensions.Logging;
+using Microsoft.Win32;
 
 namespace Client_ReWear
 {
@@ -17,17 +19,40 @@ namespace Client_ReWear
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                     fonts.AddFont("Klhamer.otf", "Klhamer");
                     fonts.AddFont("felix007-medium-webfont.ttf", "felix");
-                });
+                    fonts.AddFont("Library School.otf", "library");
+                    
+                })
+                .RegisterPages()
+                .RegisterViewModels()
+                .RegisterDataServices();
 
-            builder.Services.AddSingleton<Login>();
-            builder.Services.AddSingleton<LoginViewModel>();
-            builder.Services.AddSingleton<Register>();
-            builder.Services.AddSingleton<RegisterViewModel>();
+            
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
         }
+
+        public static MauiAppBuilder RegisterPages(this MauiAppBuilder builder)
+        {
+            builder.Services.AddTransient<Login>();
+            builder.Services.AddTransient<Register>();
+            
+            return builder;
+        }
+
+        public static MauiAppBuilder RegisterDataServices(this MauiAppBuilder builder)
+        {
+            builder.Services.AddSingleton<ReWearWebAPI>();
+            return builder;
+        }
+        public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
+        {
+            builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddTransient<RegisterViewModel>();
+            return builder;
+        }
     }
 }
+
