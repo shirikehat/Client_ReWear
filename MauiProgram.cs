@@ -38,7 +38,8 @@ namespace Client_ReWear
         {
             builder.Services.AddTransient<Login>();
             builder.Services.AddTransient<Register>();
-            
+            builder.Services.AddTransient<Home>();
+
             return builder;
         }
 
@@ -51,6 +52,7 @@ namespace Client_ReWear
         {
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
+            builder.Services.AddTransient<HomeViewModel>();
             return builder;
         }
     }

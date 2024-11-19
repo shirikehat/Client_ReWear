@@ -1,6 +1,7 @@
 ﻿using Client_ReWear.Models;
 using Client_ReWear.Services;
 using Client_ReWear.Views;
+using Microsoft.Win32;
 using System.Diagnostics;
 using System.Windows.Input;
 
@@ -8,23 +9,30 @@ namespace Client_ReWear.ViewModels;
 
 public class LoginViewModel : ViewModelBase
 {
-    public ReWearWebAPI service;
+    public ReWearWebAPI proxy;
     private readonly IServiceProvider serviceProvider;
 
-    public ICommand LoginCommand { get; set; }
-    public ICommand GoToRegisterCommand { get; set; }
-    private string username;
+    
+  
+   
 
 
     public LoginViewModel(ReWearWebAPI service, IServiceProvider serviceProvider)
     {
-        this.service = service;
         this.serviceProvider = serviceProvider;
-        //this.LoginCommand = new Command(OnLogin);
-        this.GoToRegisterCommand = new Command(OnRegisterClicked);
+            this.proxy = proxy;
+            LoginCommand = new Command(OnLogin);
+            RegisterCommand = new Command(OnRegister);
+            username = "";
+            password = "";
+            InServerCall = false;
+            errorMsg = "";
     }
 
-    public string Username
+    private string username;
+    private string password;
+
+    public string Email
     {
         get => username;
         set
@@ -32,13 +40,11 @@ public class LoginViewModel : ViewModelBase
             if (username != value)
             {
                 username = value;
-                OnPropertyChanged(nameof(Username));
-                // can add more logic here like email validation etc.
-                // can add error message property and set it here
+                OnPropertyChanged(nameof(username));
             }
         }
     }
-    private string password;
+
     public string Password
     {
         get => password;
@@ -48,81 +54,67 @@ public class LoginViewModel : ViewModelBase
             {
                 password = value;
                 OnPropertyChanged(nameof(Password));
-                // can add more logic here like email validation etc.
-                // can add error message property and set it here
+            }
+        }
+    }
+
+    private string errorMsg;
+    public string ErrorMsg
+    {
+        get => errorMsg;
+        set
+        {
+            if (errorMsg != value)
+            {
+                errorMsg = value;
+                OnPropertyChanged(nameof(ErrorMsg));
             }
         }
     }
 
 
-    //public async void OnLogin()
-    //{
-    //    LoginInfo info = new LoginInfo
-    //    {
-    //        Username = this.Username,
-    //        Password = this.Password
-    //    };
-    //    User user = await service.Login(info);
-    //    if (user != null)
-    //    {
-    //        // áãé÷ä äàí äîúùúîù äåà ÷åðä
-    //        if (user.UserType == "3")
-    //        {
-
-    //            var buyerShell = serviceProvider.GetRequiredService<AppShell>();
-    //            App.Current.MainPage = buyerShell;
-
-    //            // ÷áìú UserDetailsPageViewModel îä-DI åäâãøú äðúåðéí
-    //            var userDetailsViewModel = serviceProvider.GetRequiredService<UserDetailsPageViewModel>();
-    //            userDetailsViewModel.Initialize(user); // àúçåì ôøèé äîùúîù
-
-    //            // äâãøú BindingContext òáåø UserDetailsPage
-    //            var userDetailsPage = serviceProvider.GetRequiredService<UserDetailsPage>();
-    //            userDetailsPage.BindingContext = userDetailsViewModel;
+    public ICommand LoginCommand { get; }
+    public ICommand RegisterCommand { get; }
 
 
 
-    //        }
-    //        // áãé÷ä äàí äîúùúîù äåà îåëø
-    //        if (user.UserType == "2")
-    //        {
-
-    //            // ÷áìú BusinessProductsPageViewModel î-DI
-    //            var viewModel = serviceProvider.GetRequiredService<BusinessProductsPageViewModel>();
-
-    //            // èòéðú äîåöøéí ùì äîåëø
-    //            await viewModel.LoadProducts(user.UserId);
-
-    //            // äâãøú ä-BindingContext ùì BusinessProductsPage
-    //            var businessProductsPage = serviceProvider.GetRequiredService<BusinessProductsPage>();
-    //            businessProductsPage.BindingContext = viewModel;
-    //            var sellerShell = serviceProvider.GetRequiredService<SellerShell>();
-
-    //            App.Current.MainPage = sellerShell;
-
-    //            // ÷áìú SellerDetailsPageViewModel î-DI åäâãøú äðúåðéí
-    //            var sellerDetailsViewModel = serviceProvider.GetRequiredService<SellerDetailsPageViewModel>();
-    //            await sellerDetailsViewModel.Initialize(user.UserId);
-
-    //            // äâãøú BindingContext òáåø SellerDetailsPage
-    //            var sellerDetailsPage = serviceProvider.GetRequiredService<SellerDetailsPage>();
-    //            sellerDetailsPage.BindingContext = sellerDetailsViewModel;
-
-    //        }
-
-    //    }
-
-    //    else
-    //    {
-    //        Debug.WriteLine("Login failed");
-    //    }
-    //}
-
-    private async void OnRegisterClicked()
+    private async void OnLogin()
     {
-        // ÷áìú äãó ãøê ä-DI åðéååè àìéå
-        var registrationPage = serviceProvider.GetRequiredService<Register>();
-        await App.Current.MainPage.Navigation.PushAsync(registrationPage);
+        //Choose the way you want to blobk the page while indicating a server call
+        InServerCall = true;
+        ErrorMsg = "";
+        //Call the server to login
+        LoginInfo loginInfo = new LoginInfo { Username = username, Password = Password };
+        User? u = await this.proxy.Login(loginInfo);
+
+        InServerCall = false;
+
+        //Set the application logged in user to be whatever user returned (null or real user)
+        ((App)Application.Current).LoggedInUser = u;
+        if (u == null)
+        {
+            ErrorMsg = "Invalid username or password";
+        }
+        else
+        {
+            ErrorMsg = "";
+            //Navigate to the main page
+            AppShell shell = serviceProvider.GetService<AppShell>();
+            HomeViewModel homeViewModel = serviceProvider.GetService<HomeViewModel>();
+            homeViewModel.Refresh(); //Refresh data and user in the tasksview model as it is a singleton
+            ((App)Application.Current).MainPage = shell;
+            Shell.Current.FlyoutIsPresented = false; //close the flyout
+            Shell.Current.GoToAsync("Home"); //Navigate to the Home tab page
+        }
+    }
+
+    private void OnRegister()
+    {
+        ErrorMsg = "";
+        Email = "";
+        Password = "";
+        // Navigate to the Register View page
+        ((App)Application.Current).MainPage.Navigation.PushAsync(serviceProvider.GetService<Register>());
     }
 
 

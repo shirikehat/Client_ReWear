@@ -52,7 +52,7 @@
                 TextColor="Blue"
                 >
                 <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding GoToRegisterCommand}"/>
+                    <TapGestureRecognizer Command="{Binding RegisterCommand}"/>
                 </Label.GestureRecognizers>
             </Label>
         </StackLayout>
