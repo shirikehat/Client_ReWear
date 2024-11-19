@@ -18,95 +18,103 @@
             VerticalScrollBarVisibility="Always"
             HorizontalOptions="Center">
 
-            <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" >
+
+            <Grid ColumnDefinitions="*" RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" >
 
                 <Label
                     x:Name="name_lbl"
-                    Grid.Column="1"
+                    Grid.Column="0"
                     Margin="15"
-                    Text="username"
-                    FontFamily="library"/>
+                    Text="Username"
+                    Grid.Row="1"
+                />
 
                 <Entry
                     Grid.Column="0"
-                    Placeholder="enter username"
-                     FontFamily="library"
-                     Text="{Binding Name}"
-                     />
+                    Placeholder="enter user name"
+                     PlaceholderColor="Grey"
+                    Grid.Row="2"
+                    Text="{Binding Name}"
+                  
+                />
 
                 <Label
-                    Grid.Row="2"
+                    Grid.Row="3"
                     Grid.ColumnSpan="2"
                     Margin="15"
-                    HorizontalOptions="Center"
-                    FontFamily="felix"
+                    HorizontalOptions="Start"
                     Text="{Binding User_Error}"
                     TextColor="Red" />
 
 
                 <Label
-    x:Name="email_lbl"
-    Grid.Row="3"
-                    Grid.Column="1"
-    Margin="15"
-    Text="email"
-     FontFamily="library"/>
-
-                <Entry
-    Grid.Row="3"
-    Grid.Column="0"
-    Keyboard="Email"
-    Placeholder="enter email"
-     FontFamily="library"
-     />
-
-                <Label
-    x:Name="phone_lbl"
-    Grid.Row="4"
-                    Grid.Column="1"
-    Margin="15"
-    Text="phone"
-     FontFamily="library"/>
-
-                <Entry
-    Grid.Row="4"
-    Grid.Column="0"
-    Keyboard="Telephone"
-    Placeholder="enter phone"
-     FontFamily="library"
-     />
-
-                <Label
-                    x:Name="password_lbl"
-                    Grid.Row="5"
-                    Grid.Column="1"
+                     x:Name="email_lbl"
+                     Grid.Row="4"
+                    Grid.Column="0"
                     Margin="15"
-                    Text="password"
-                     FontFamily="library"/>
+                    Text="Email"
+                    />
+
                 <Entry
                     Grid.Row="5"
                     Grid.Column="0"
-                    Keyboard="Chat"
-                    Placeholder="enter password"
-                    Text="{Binding Password}"
-                     FontFamily="library"
-                     />
+                    Keyboard="Email"
+                    Placeholder="enter email"
+                    PlaceholderColor="Grey"
+                    Text="{Binding Email}"
+                   />
 
                 <Label
-                    Grid.Row="6"
+      x:Name="phone_lbl"
+      Grid.Row="6"
+     Grid.Column="0"
+     Margin="15"
+     Text="Phone"
+     />
+
+                <Entry
+     Grid.Row="7"
+     Grid.Column="0"
+     Keyboard="Telephone"
+     Placeholder="enter phone"
+     PlaceholderColor="Grey"
+     Text="{Binding Phone}"
+    />
+
+                <Label
+                    x:Name="password_lbl"
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    Margin="15"
+                    Text="Password"
+                 />
+                <Entry
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    Keyboard="Chat"
+                    Margin="15"
+                    Placeholder="enter password"
+                    PlaceholderColor="Grey"
+                    Text="{Binding Password, Mode=TwoWay}" />
+
+                <Label
+                    Grid.Row="10"
                     Grid.ColumnSpan="2"
-                    HorizontalOptions="Center"
-                    Text="{Binding Password_Error}"
-                    FontFamily="felix"
+                    HorizontalOptions="Start"
+                    Text="{Binding Password_Error, Mode=TwoWay}"
                     TextColor="red" />
 
 
+
+
+
                 <Button
-                    Grid.Row="7"
+                    Grid.Row="13"
                     Grid.ColumnSpan="2"
-                     FontFamily="library"
-                    
-                    Text="signup" />
+                    Command="{Binding RegisterCommand}"
+                    IsEnabled="{Binding CanRegister}"
+                    Text="Send" />
+
 
             </Grid>
 

@@ -1,3 +1,6 @@
+using Client_ReWear.Models;
+using Client_ReWear.Services;
+
 namespace Client_ReWear.ViewModels;
 
 public class RegisterViewModel : ViewModelBase
@@ -9,131 +12,250 @@ public class RegisterViewModel : ViewModelBase
     private string password;
     private string? password_error;
 
-    public RegisterViewModel()
-	{
-		
-	}
+    private readonly IServiceProvider serviceProvider;
 
+
+    private ReWearWebAPI proxy;
+    public RegisterViewModel(ReWearWebAPI proxy)
+	{
+        this.proxy = proxy;
+        RegisterCommand = new Command(OnRegister);
+        CancelCommand = new Command(OnCancel);
+        ShowPasswordCommand = new Command(OnShowPassword);
+        IsPassword = true;
+        NameError = "Name is required";
+        EmailError = "Email is required";
+        PasswordError = "Password must be at least 4 characters long and contain letters and numbers";
+    }
+
+
+    //Defiine properties for each field in the registration form including error messages and validation logic
+    #region Name
+    private bool showNameError;
+
+    public bool ShowNameError
+    {
+        get => showNameError;
+        set
+        {
+            showNameError = value;
+            OnPropertyChanged("ShowNameError");
+        }
+    }
 
     public string Name
     {
-        get
-        {
-            return name;
-        }
+        get => name;
         set
         {
             name = value;
-            User_Error = ""; // איפוס שגיאת שם המשתמש
-            OnPropertyChanged(nameof(Name));
-            // בדיקת תקינות שם המשתמש
-
-            if (!string.IsNullOrEmpty(Name))
-
-            {
-                if (char.IsDigit(Name[0]))
-                {
-                    User_Error = "!!שם המשתמש לא יכול להתחיל בספרה!!";
-                    OnPropertyChanged(nameof(Name));
-                }
-
-            }
+            ValidateName();
+            OnPropertyChanged("Name");
         }
     }
 
+    private string nameError;
 
-
-    public string User_Error
+    public string NameError
     {
-        get
-        {
-            return user_error;
-        }
+        get => nameError;
         set
         {
-            user_error = value;
-            OnPropertyChanged(nameof(User_Error));
+            nameError = value;
+            OnPropertyChanged("NameError");
         }
     }
 
+    private void ValidateName()
+    {
+        this.ShowNameError = string.IsNullOrEmpty(Name);
+    }
+    #endregion
 
+
+    #region Email
+    private bool showEmailError;
+
+    public bool ShowEmailError
+    {
+        get => showEmailError;
+        set
+        {
+            showEmailError = value;
+            OnPropertyChanged("ShowEmailError");
+        }
+    }
 
     public string Email
     {
-        get
-        {
-            return email;
-        }
+        get => email;
         set
         {
             email = value;
-            OnPropertyChanged(nameof(Email));
+            ValidateEmail();
+            OnPropertyChanged("Email");
         }
     }
 
-    public string? Password
+    private string emailError;
+
+    public string EmailError
     {
-        get { return password; }
+        get => emailError;
         set
         {
-            password = value;
-            Password_Error = "";
-            OnPropertyChanged(nameof(Password));
-            OnPropertyChanged(nameof(User_Error));
-            if (string.IsNullOrEmpty(password))
+            emailError = value;
+            OnPropertyChanged("EmailError");
+        }
+    }
+
+    private void ValidateEmail()
+    {
+        this.ShowEmailError = string.IsNullOrEmpty(Email);
+        if (!ShowEmailError)
+        {
+            //check if email is in the correct format using regular expression
+            if (!System.Text.RegularExpressions.Regex.IsMatch(Email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
             {
-                Password_Error = ""; // איפוס השגיאה אם השדה ריק
+                EmailError = "Email is not valid";
+                ShowEmailError = true;
             }
             else
             {
-                if (password != null)
-                {
-                    bool IsPasswordOk = IsValidPassword(password);
-                    if (!IsPasswordOk)
-                    {
-                        Password_Error = "!!סיסמה חייבת להכיל לפחות אות גדולה אחת ומספר!!";
-                    }
-                }
+                EmailError = "";
+                ShowEmailError = false;
             }
         }
-    }
-
-    private bool IsValidPassword(string password)
-    {
-        bool hasUpperCase = false;
-        bool hasDigit = false;
-
-        foreach (char c in password)
+        else
         {
-            if (char.IsUpper(c))
-            {
-                hasUpperCase = true;
-            }
-            if (char.IsDigit(c))
-            {
-                hasDigit = true;
-            }
-
-            if (hasUpperCase && hasDigit)
-            {
-                break; // אם מצאנו כבר גם אות גדולה וגם ספרה, אפשר לעצור את הלולאה
-            }
+            EmailError = "Email is required";
         }
-        return hasUpperCase && hasDigit;
-
     }
+    #endregion
 
-    public string Password_Error
+    #region Password
+    private bool showPasswordError;
+
+    public bool ShowPasswordError
     {
-        get { return password_error; }
+        get => showPasswordError;
         set
         {
-            password_error = value;
-            OnPropertyChanged(nameof(Password_Error));
-            //OnPropertyChanged(nameof(CanRegister));
+            showPasswordError = value;
+            OnPropertyChanged("ShowPasswordError");
         }
     }
 
 
+    public string Password
+    {
+        get => password;
+        set
+        {
+            password = value;
+            ValidatePassword();
+            OnPropertyChanged("Password");
+        }
+    }
+
+    private string passwordError;
+
+    public string PasswordError
+    {
+        get => passwordError;
+        set
+        {
+            passwordError = value;
+            OnPropertyChanged("PasswordError");
+        }
+    }
+
+    private void ValidatePassword()
+    {
+        //Password must include characters and numbers and be longer than 4 characters
+        if (string.IsNullOrEmpty(password) ||
+            password.Length < 4 ||
+            !password.Any(char.IsDigit) ||
+            !password.Any(char.IsLetter))
+        {
+            this.ShowPasswordError = true;
+        }
+        else
+            this.ShowPasswordError = false;
+    }
+
+    //This property will indicate if the password entry is a password
+    private bool isPassword = true;
+    public bool IsPassword
+    {
+        get => isPassword;
+        set
+        {
+            isPassword = value;
+            OnPropertyChanged("IsPassword");
+        }
+    }
+    //This command will trigger on pressing the password eye icon
+    public Command ShowPasswordCommand { get; }
+    //This method will be called when the password eye icon is pressed
+    public void OnShowPassword()
+    {
+        //Toggle the password visibility
+        IsPassword = !IsPassword;
+    }
+    #endregion
+
+    //Define a command for the register button
+    public Command RegisterCommand { get; }
+    public Command CancelCommand { get; }
+
+    //Define a method that will be called when the register button is clicked
+    public async void OnRegister()
+    {
+        ValidateName();
+        ValidateEmail();
+        ValidatePassword();
+
+        if (!ShowNameError &&  !ShowEmailError && !ShowPasswordError)
+        {
+            //Create a new AppUser object with the data from the registration form
+            var newUser = new User
+            {
+                UserName = Name,
+                Email = Email,
+                Password = Password,
+                IsManager = false
+            };
+
+            //Call the Register method on the proxy to register the new user
+            InServerCall = true;
+            newUser = await proxy.Register(newUser);
+            InServerCall = false;
+
+            //If the registration was successful, navigate to the login page
+            if (newUser != null)
+            {
+                
+                InServerCall = false;
+
+                ((App)(Application.Current)).MainPage.Navigation.PopAsync();
+            }
+            else
+            {
+
+                //If the registration failed, display an error message
+                string errorMsg = "Registration failed. Please try again.";
+                await Application.Current.MainPage.DisplayAlert("Registration", errorMsg, "ok");
+            }
+        }
+    }
+
+    //Define a method that will be called upon pressing the cancel button
+    public void OnCancel()
+    {
+        //Navigate back to the login page
+        ((App)(Application.Current)).MainPage.Navigation.PopAsync();
+    }
 
 }
+

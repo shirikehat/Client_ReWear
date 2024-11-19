@@ -6,6 +6,10 @@ namespace Client_ReWear.Services;
 
 public class ReWearWebAPI
 {
+
+    #region with tunnel
+    //Define the serevr IP address! (should be realIP address if you are using a device that is not running on the same machine as the server)
+    private static string serverIP = "3zr245ps-5110.euw.devtunnels.ms";
     //מנהל תכונות מתקדמות של בקשות HTTP
     //cookies כמו תמיכה
     private HttpClient client;
@@ -14,13 +18,14 @@ public class ReWearWebAPI
     // בעת שליחת וקבלת בקשות מהשרת
     private JsonSerializerOptions jsonSerializerOptions;
 
-    // כתובת הבסיס לכתובת השרת מותאמת לפי פלטפורמות ההרצה
-    public static string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://jfzd1hz5-5094.euw.devtunnels.ms/api/" : "http://localhost:5021/api/";
-    public static string ImageUrl = DeviceInfo.Platform == DevicePlatform.Android ? "https://jfzd1hz5-5094.euw.devtunnels.ms/images/" : "http://localhost:5021/images/";
-
     // אובייקט של מחלקת השירות שמכיל את כתובת הבסיס לשרת
     private string baseUrl;
 
+    // כתובת הבסיס לכתובת השרת מותאמת לפי פלטפורמות ההרצה
+    public static string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://jfzd1hz5-5094.euw.devtunnels.ms/api/" : "http://localhost:5021/api/";
+    public static string ImageBaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://jfzd1hz5-5094.euw.devtunnels.ms/images/" : "http://localhost:5021/images/";
+
+    #endregion
 
     //מאפיין זה מחזיק את פרטי המשתמש לאחר התחברות מוצלחת.
     //ניתן להשתמש בו לצורך בדיקה או שליפה של מידע על המשתמש המחובר
@@ -47,6 +52,16 @@ public class ReWearWebAPI
         };
     }
 
+
+    public string GetImagesBaseAddress()
+    {
+        return ReWearWebAPI.ImageBaseAddress;
+    }
+
+    public string GetDefaultProfilePhotoUrl()
+    {
+        return $"{ReWearWebAPI.ImageBaseAddress}/profileImages/default.png";
+    }
 
     public async Task<User> Login(LoginInfo info)
     {
@@ -92,49 +107,42 @@ public class ReWearWebAPI
         }
     }
 
-    public async Task<int?> Register(User user)
+    public async Task<User?> Register(User user)
     {
-        // Set the URL to point to the specific API endpoint for registering a user
-        string url = $"{this.baseUrl}Register";
-
+        //Set URI to the specific function API
+        string url = $"{this.baseUrl}register";
         try
         {
-            // Serialize the User object into a JSON string to send it to the API
+            //Call the server API
             string json = JsonSerializer.Serialize(user);
-
-            // Create the content to send in the POST request with proper encoding and content type
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            // Send a POST request to the server API with the user data
             HttpResponseMessage response = await client.PostAsync(url, content);
-
-            // Check if the response status indicates success (HTTP status code 200)
+            //Check status
             if (response.IsSuccessStatusCode)
             {
-                // Read the response content as a string
+                //Extract the content as string
                 string resContent = await response.Content.ReadAsStringAsync();
-
-                // Deserialize the response to get the UserId
-                int? userId = JsonSerializer.Deserialize<int?>(resContent, jsonSerializerOptions);
-
-                // Return the UserId if it was received successfully
-                return userId;
+                //Desrialize result
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                User? result = JsonSerializer.Deserialize<User>(resContent, options);
+                return result;
             }
             else
             {
-                // Return null if the response status was not successful
                 return null;
             }
         }
         catch (Exception ex)
         {
-            // If there is an exception, return null (indicating the registration failed)
             return null;
         }
     }
 
 
 
-    
+
 
 }
