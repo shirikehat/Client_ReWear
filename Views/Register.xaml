@@ -12,121 +12,78 @@
         TextColor="LightPink"
         FontFamily="Klhamer"/>
 
-        <ScrollView
-            HorizontalScrollBarVisibility="Always"
-            VerticalOptions="FillAndExpand"
-            VerticalScrollBarVisibility="Always"
-            HorizontalOptions="Center">
+        <Grid>
 
 
-            <Grid ColumnDefinitions="*" RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" >
+            <!-- Main Content -->
+            <VerticalStackLayout IsEnabled="{Binding NotInServerCall}" Padding="20">
 
-                <Label
-                    x:Name="name_lbl"
-                    Grid.Column="0"
-                    Margin="15"
-                    Text="Username"
-                    Grid.Row="1"
-                />
+                <!-- First Name -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="First Name" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                    <Label Text="{Binding NameError}" IsVisible="{Binding ShowNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
+                </Grid>
+                <Entry Placeholder="Type First Name" Text="{Binding Name}" Style="{StaticResource entryStyle}" />
 
-                <Entry
-                    Grid.Column="0"
-                    Placeholder="enter user name"
-                     PlaceholderColor="Grey"
-                    Grid.Row="2"
-                    Text="{Binding Name}"
-                  
-                />
+                <!-- Phone -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Phone" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                    <Label Text="{Binding PhoneError}" IsVisible="{Binding ShowPhoneError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
+                </Grid>
+                <Entry Placeholder="Type Phone" Text="{Binding Phone}" Style="{StaticResource entryStyle}" />
 
-                <Label
-                    Grid.Row="3"
-                    Grid.ColumnSpan="2"
-                    Margin="15"
-                    HorizontalOptions="Start"
-                    Text="{Binding User_Error}"
-                    IsVisible="{Binding ShowNameError}"
-                    TextColor="Red" />
+                <!-- Email -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Email" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                    <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
+                </Grid>
+                <Entry Placeholder="Type Email" Text="{Binding Email}" Style="{StaticResource entryStyle}" />
 
+                <!-- Password -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Password" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                    <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="40" />
+                    </Grid.ColumnDefinitions>
+                    <Entry Grid.Column="0" Placeholder="Type Password" Text="{Binding Password}" IsPassword="{Binding IsPassword}" Style="{StaticResource entryStyle}" />
+                    <ImageButton Grid.Column="1" HeightRequest="25" Source="passwordeye.jpg" Command="{Binding ShowPasswordCommand}" />
+                </Grid>
 
-                <Label
-                     x:Name="email_lbl"
-                     Grid.Row="4"
-                    Grid.Column="0"
-                    Margin="15"
-                    Text="Email"
-                    />
-
-                <Entry
-                    Grid.Row="5"
-                    Grid.Column="0"
-                    Keyboard="Email"
-                    Placeholder="enter email"
-                    PlaceholderColor="Grey"
-                    Text="{Binding Email}"
-                   />
-
-                <Label
-      x:Name="phone_lbl"
-      Grid.Row="6"
-     Grid.Column="0"
-     Margin="15"
-     Text="Phone"
-     />
-
-                <Entry
-     Grid.Row="7"
-     Grid.Column="0"
-     Keyboard="Telephone"
-     Placeholder="enter phone"
-     PlaceholderColor="Grey"
-     Text="{Binding Phone}"
-    />
-
-                <Label
-                    x:Name="password_lbl"
-                    Grid.Row="8"
-                    Grid.Column="0"
-                    Margin="15"
-                    Text="Password"
-                 />
-                <Entry
-                    Grid.Row="9"
-                    Grid.Column="0"
-                    Keyboard="Chat"
-                    Margin="15"
-                    Placeholder="enter password"
-                    PlaceholderColor="Grey"
-                    Text="{Binding Password, Mode=TwoWay}" />
-
-                <Label
-                    Grid.Row="10"
-                    Grid.ColumnSpan="2"
-                    HorizontalOptions="Start"
-                    Text="{Binding Password_Error, Mode=TwoWay}"
-                    TextColor="red" />
-
-
-
-
-
-                <Button
-                    Grid.Row="13"
-                    Grid.ColumnSpan="2"
-                    Command="{Binding RegisterCommand}"
-                    BackgroundColor="LightPink"
-                    Text="Send" />
-
-                <Button
-    Grid.Row="14"
-    Grid.ColumnSpan="2"
-    Command="{Binding CancelCommand}"
-    BackgroundColor="LightPink"
-    Text="Send" />
-
-
-            </Grid>
-
-        </ScrollView>
+                <!-- Register and Cancel Buttons -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Text="Register" Command="{Binding RegisterCommand}" IsEnabled="{Binding NotInServerCall}" Grid.Column="1" Style="{StaticResource buttonStyle}" />
+                    <Button Text="Cancel" Command="{Binding CancelCommand}" IsEnabled="{Binding NotInServerCall}" Grid.Column="0" Style="{StaticResource buttonStyle}"/>
+                </Grid>
+            </VerticalStackLayout>
+            <!-- Centered ActivityIndicator -->
+            <ActivityIndicator IsRunning="{Binding InServerCall}" 
+                   Color="Red" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center" />
+        </Grid>
     </StackLayout>
-
 </ContentPage>
