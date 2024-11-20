@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:Client_ReWear.ViewModels"
              x:Class="Client_ReWear.Views.Register"
              Title="Register">
     <StackLayout VerticalOptions="FillAndExpand">
@@ -18,16 +19,16 @@
             <!-- Main Content -->
             <VerticalStackLayout IsEnabled="{Binding NotInServerCall}" Padding="20">
 
-                <!-- First Name -->
+                <!-- User Name -->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Text="First Name" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                    <Label Text="Username" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
                     <Label Text="{Binding NameError}" IsVisible="{Binding ShowNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
                 </Grid>
-                <Entry Placeholder="Type First Name" Text="{Binding Name}" Style="{StaticResource entryStyle}" />
+                <Entry Placeholder="Type Username" Text="{Binding Name}" Style="{StaticResource entryStyle}" />
 
                 <!-- Phone -->
                 <Grid>

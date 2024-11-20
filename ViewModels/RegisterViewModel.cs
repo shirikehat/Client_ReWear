@@ -9,6 +9,7 @@ public class RegisterViewModel : ViewModelBase
     private int? userId { get; set; }
     private string? user_error;
     private string email;
+    private string phone;
     private string password;
     private string? password_error;
 
@@ -25,6 +26,7 @@ public class RegisterViewModel : ViewModelBase
         IsPassword = true;
         NameError = "Name is required";
         EmailError = "Email is required";
+        PhoneError = "Phone is required";
         PasswordError = "Password must be at least 4 characters long and contain letters and numbers";
     }
 
@@ -133,6 +135,58 @@ public class RegisterViewModel : ViewModelBase
     }
     #endregion
 
+
+
+    #region Phone
+    private bool showPhoneError;
+
+    public bool ShowPhoneError
+    {
+        get => showPhoneError;
+        set
+        {
+            showPhoneError = value;
+            OnPropertyChanged(nameof(ShowPhoneError));
+        }
+    }
+
+    public string Phone
+    {
+        get => phone;
+        set
+        {
+            phone = value;
+            ValidatePhone();
+            OnPropertyChanged(nameof(Phone));
+        }
+    }
+
+    private string phoneError;
+
+    public string PhoneError
+    {
+        get => phoneError;
+        set
+        {
+            phoneError = value;
+            OnPropertyChanged(nameof(PhoneError));
+        }
+    }
+
+    private void ValidatePhone()
+    {
+        //Phone must be only numbers and have 10 numbers
+        if (string.IsNullOrEmpty(phone) ||
+            phone.Length == 10 ||
+            !phone.All(char.IsDigit))
+        {
+            this.ShowPhoneError = true;
+        }
+        else
+            this.ShowPhoneError = false;
+    }
+    #endregion
+
     #region Password
     private bool showPasswordError;
 
@@ -213,10 +267,11 @@ public class RegisterViewModel : ViewModelBase
     public async void OnRegister()
     {
         ValidateName();
+        ValidatePhone();
         ValidateEmail();
         ValidatePassword();
 
-        if (!ShowNameError &&  !ShowEmailError && !ShowPasswordError)
+        if (!ShowNameError && !ShowEmailError && !ShowPasswordError)
         {
             //Create a new AppUser object with the data from the registration form
             var newUser = new User
@@ -235,7 +290,7 @@ public class RegisterViewModel : ViewModelBase
             //If the registration was successful, navigate to the login page
             if (newUser != null)
             {
-                
+
                 InServerCall = false;
 
                 ((App)(Application.Current)).MainPage.Navigation.PopAsync();
@@ -249,6 +304,8 @@ public class RegisterViewModel : ViewModelBase
             }
         }
     }
+
+
 
     //Define a method that will be called upon pressing the cancel button
     public void OnCancel()
