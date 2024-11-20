@@ -32,7 +32,7 @@ public class LoginViewModel : ViewModelBase
     private string username;
     private string password;
 
-    public string Email
+    public string Username
     {
         get => username;
         set
