@@ -111,7 +111,7 @@ public class LoginViewModel : ViewModelBase
     private void OnRegister()
     {
         ErrorMsg = "";
-        Email = "";
+        Username = "";
         Password = "";
         // Navigate to the Register View page
         ((App)Application.Current).MainPage.Navigation.PushAsync(serviceProvider.GetService<Register>());

@@ -39,7 +39,7 @@ public class RegisterViewModel : ViewModelBase
         set
         {
             showNameError = value;
-            OnPropertyChanged("ShowNameError");
+            OnPropertyChanged(nameof(ShowNameError));
         }
     }
 
@@ -50,7 +50,7 @@ public class RegisterViewModel : ViewModelBase
         {
             name = value;
             ValidateName();
-            OnPropertyChanged("Name");
+            OnPropertyChanged(nameof(Name));
         }
     }
 
@@ -62,7 +62,7 @@ public class RegisterViewModel : ViewModelBase
         set
         {
             nameError = value;
-            OnPropertyChanged("NameError");
+            OnPropertyChanged(nameof(NameError));
         }
     }
 
@@ -82,7 +82,7 @@ public class RegisterViewModel : ViewModelBase
         set
         {
             showEmailError = value;
-            OnPropertyChanged("ShowEmailError");
+            OnPropertyChanged(nameof(ShowEmailError));
         }
     }
 
@@ -93,7 +93,7 @@ public class RegisterViewModel : ViewModelBase
         {
             email = value;
             ValidateEmail();
-            OnPropertyChanged("Email");
+            OnPropertyChanged(nameof(Email));
         }
     }
 
@@ -105,7 +105,7 @@ public class RegisterViewModel : ViewModelBase
         set
         {
             emailError = value;
-            OnPropertyChanged("EmailError");
+            OnPropertyChanged(nameof(EmailError));
         }
     }
 
@@ -142,7 +142,7 @@ public class RegisterViewModel : ViewModelBase
         set
         {
             showPasswordError = value;
-            OnPropertyChanged("ShowPasswordError");
+            OnPropertyChanged(nameof(ShowPasswordError));
         }
     }
 
@@ -154,7 +154,7 @@ public class RegisterViewModel : ViewModelBase
         {
             password = value;
             ValidatePassword();
-            OnPropertyChanged("Password");
+            OnPropertyChanged(nameof(Password));
         }
     }
 
@@ -166,7 +166,7 @@ public class RegisterViewModel : ViewModelBase
         set
         {
             passwordError = value;
-            OnPropertyChanged("PasswordError");
+            OnPropertyChanged(nameof(PasswordError));
         }
     }
 
@@ -192,7 +192,7 @@ public class RegisterViewModel : ViewModelBase
         set
         {
             isPassword = value;
-            OnPropertyChanged("IsPassword");
+            OnPropertyChanged(nameof(IsPassword));
         }
     }
     //This command will trigger on pressing the password eye icon

@@ -44,6 +44,7 @@
                     Margin="15"
                     HorizontalOptions="Start"
                     Text="{Binding User_Error}"
+                    IsVisible="{Binding ShowNameError}"
                     TextColor="Red" />
 
 
@@ -112,8 +113,15 @@
                     Grid.Row="13"
                     Grid.ColumnSpan="2"
                     Command="{Binding RegisterCommand}"
-                    IsEnabled="{Binding CanRegister}"
+                    BackgroundColor="LightPink"
                     Text="Send" />
+
+                <Button
+    Grid.Row="14"
+    Grid.ColumnSpan="2"
+    Command="{Binding CancelCommand}"
+    BackgroundColor="LightPink"
+    Text="Send" />
 
 
             </Grid>
