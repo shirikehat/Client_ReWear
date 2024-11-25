@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:Client_ReWear.ViewModels"
              x:Class="Client_ReWear.Views.Register"
-             Title="Register">
+             Title="Register"
+              x:DataType="viewmodel:RegisterViewModel">
     <StackLayout VerticalOptions="FillAndExpand">
 
         <Label

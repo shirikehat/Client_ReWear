@@ -39,6 +39,7 @@ namespace Client_ReWear
             builder.Services.AddTransient<Login>();
             builder.Services.AddTransient<Register>();
             builder.Services.AddTransient<Home>();
+            builder.Services.AddTransient<AppShell>();
 
             return builder;
         }

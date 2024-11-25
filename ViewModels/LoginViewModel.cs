@@ -20,7 +20,7 @@ public class LoginViewModel : ViewModelBase
     public LoginViewModel(ReWearWebAPI service, IServiceProvider serviceProvider)
     {
         this.serviceProvider = serviceProvider;
-            this.proxy = proxy;
+            this.proxy = service;
             LoginCommand = new Command(OnLogin);
             RegisterCommand = new Command(OnRegister);
             username = "";
@@ -84,7 +84,7 @@ public class LoginViewModel : ViewModelBase
         InServerCall = true;
         ErrorMsg = "";
         //Call the server to login
-        LoginInfo loginInfo = new LoginInfo { Username = username, Password = Password };
+        LoginInfo loginInfo = new LoginInfo { Username = Username, Password = Password };
         User? u = await this.proxy.Login(loginInfo);
 
         InServerCall = false;
@@ -100,8 +100,8 @@ public class LoginViewModel : ViewModelBase
             ErrorMsg = "";
             //Navigate to the main page
             AppShell shell = serviceProvider.GetService<AppShell>();
-            HomeViewModel homeViewModel = serviceProvider.GetService<HomeViewModel>();
-            homeViewModel.Refresh(); //Refresh data and user in the tasksview model as it is a singleton
+            //HomeViewModel homeViewModel = serviceProvider.GetService<HomeViewModel>();
+            //homeViewModel.Refresh(); //Refresh data and user in the tasksview model as it is a singleton
             ((App)Application.Current).MainPage = shell;
             Shell.Current.FlyoutIsPresented = false; //close the flyout
             Shell.Current.GoToAsync("Home"); //Navigate to the Home tab page

@@ -17,14 +17,14 @@
         <Entry
                 Placeholder="enter username"
                 PlaceholderColor="LightGrey"
-            FontFamily="library"
+            
         Text="{Binding Username}"/>
 
         <Entry
                 IsPassword="True"
                 Placeholder="enter password"
                 PlaceholderColor="LightGrey"
-            FontFamily="library"
+            
         Text="{Binding Password}" />
 
         <HorizontalStackLayout HorizontalOptions="Center">
@@ -35,7 +35,7 @@
                 FontSize="25"
                 
                 BackgroundColor="Lightpink"
-                FontFamily="library"/>
+               />
             
             <!--<Label Text="{Binding Messege}" TextColor="{Binding Color}" />-->
 
@@ -46,7 +46,7 @@
         <Label
                 FontAttributes="Bold"
             FontSize="Medium"
-                FontFamily="library"
+               
             HorizontalOptions="Center"
                 Text="signup"
                 TextColor="Blue"

@@ -9,7 +9,7 @@ public class ReWearWebAPI
 
     #region with tunnel
     //Define the serevr IP address! (should be realIP address if you are using a device that is not running on the same machine as the server)
-    private static string serverIP = "3zr245ps-5110.euw.devtunnels.ms";
+    private static string serverIP = "jfzd1hz5-5094.euw.devtunnels.ms";
     //מנהל תכונות מתקדמות של בקשות HTTP
     //cookies כמו תמיכה
     private HttpClient client;
@@ -22,8 +22,8 @@ public class ReWearWebAPI
     private string baseUrl;
 
     // כתובת הבסיס לכתובת השרת מותאמת לפי פלטפורמות ההרצה
-    public static string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://jfzd1hz5-5094.euw.devtunnels.ms/api/" : "http://localhost:5021/api/";
-    public static string ImageBaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://jfzd1hz5-5094.euw.devtunnels.ms/images/" : "http://localhost:5021/images/";
+    public static string BaseAddress = "https://jfzd1hz5-5094.euw.devtunnels.ms/api/";
+    public static string ImageBaseAddress = "https://jfzd1hz5-5094.euw.devtunnels.ms/images/";
 
     #endregion
 
@@ -70,7 +70,7 @@ public class ReWearWebAPI
         try
         {
             // Serialize the login info into a JSON string using the configured options
-            string json = JsonSerializer.Serialize(info, jsonSerializerOptions);
+            string json = JsonSerializer.Serialize(info);
 
             // Create the content to send in the POST request with proper encoding and content type
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -83,21 +83,16 @@ public class ReWearWebAPI
                 //Extract the content as string
                 string resContent = await response.Content.ReadAsStringAsync();
 
-                User result = JsonSerializer.Deserialize<User>(resContent, jsonSerializerOptions);
-
-                // Store the logged-in user details for further use
-                this.LoggedInUser = result;
-
-                // Show a success message to the user
-                await Application.Current.MainPage.DisplayAlert("Login", "Login Succeced", "ok");
-                // Return the logged-in user details
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                User? result = JsonSerializer.Deserialize<User>(resContent, options);
                 return result;
             }
             else
             {
-                // ניתן להוסיף תנאים שיציגו הודעות שגיאה מתאימות לסוגים השונים
-                // טיפול בתקלות שעלולות להתרחש במהלך התחברות
-                await Application.Current.MainPage.DisplayAlert("Login", "Login Faild!", "ok");
+                
                 return null;
             }
         }

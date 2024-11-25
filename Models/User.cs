@@ -1,6 +1,6 @@
 namespace Client_ReWear.Models;
 
-public class User : ContentPage
+public class User
 {
 	
     public int Id { get; set; }
