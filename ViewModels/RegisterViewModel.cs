@@ -177,7 +177,7 @@ public class RegisterViewModel : ViewModelBase
     {
         //Phone must be only numbers and have 10 numbers
         if (string.IsNullOrEmpty(phone) ||
-            phone.Length == 10 ||
+            phone.Length != 10 ||
             !phone.All(char.IsDigit))
         {
             this.ShowPhoneError = true;
@@ -279,6 +279,7 @@ public class RegisterViewModel : ViewModelBase
                 UserName = Name,
                 Email = Email,
                 Password = Password,
+                Phone = Phone,
                 IsManager = false
             };
 
