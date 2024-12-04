@@ -17,20 +17,21 @@
         <Entry
                 Placeholder="enter username"
                 PlaceholderColor="LightGrey"
-            
+            FontFamily="SA"
         Text="{Binding Username}"/>
 
         <Entry
                 IsPassword="True"
                 Placeholder="enter password"
                 PlaceholderColor="LightGrey"
-            
+            FontFamily="SA"
         Text="{Binding Password}" />
 
         <HorizontalStackLayout HorizontalOptions="Center">
             <Button
                     Command="{Binding LoginCommand}"
                     Text="login"
+                FontFamily="SA"
                     WidthRequest="100"
                 FontSize="25"
                 
@@ -42,13 +43,14 @@
         </HorizontalStackLayout>
 
         <StackLayout Margin="0,40,0,0" HorizontalOptions="Center">
-            <Label Text="no user?" FontFamily="felix" FontSize="Medium" />
+            <Label Text="no user?" FontFamily="SA" FontSize="Medium" />
         <Label
                 FontAttributes="Bold"
             FontSize="Medium"
                
             HorizontalOptions="Center"
                 Text="signup"
+            FontFamily="SA"
                 TextColor="Blue"
                 >
                 <Label.GestureRecognizers>

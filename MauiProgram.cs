@@ -20,6 +20,7 @@ namespace Client_ReWear
                     fonts.AddFont("Klhamer.otf", "Klhamer");
                     fonts.AddFont("felix007-medium-webfont.ttf", "felix");
                     fonts.AddFont("Library School.otf", "library");
+                    fonts.AddFont("Sweet Autumn.otf", "SA");
                     
                 })
                 .RegisterPages()

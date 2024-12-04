@@ -69,6 +69,7 @@
 	  <None Remove="Resources\Fonts\felix007-medium-webfont.ttf" />
 	  <None Remove="Resources\Fonts\Klhamer.otf" />
 	  <None Remove="Resources\Fonts\Library School.otf" />
+	  <None Remove="Resources\Fonts\Sweet Autumn.otf" />
 	</ItemGroup>
 
 	<ItemGroup>
