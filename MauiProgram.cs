@@ -40,6 +40,13 @@ namespace Client_ReWear
             builder.Services.AddTransient<Register>();
             builder.Services.AddTransient<Home>();
             builder.Services.AddTransient<AppShell>();
+            builder.Services.AddTransient<AdminPage>();
+            builder.Services.AddTransient<Wishlist>();
+            builder.Services.AddTransient<Post>();
+            builder.Services.AddTransient<Profile>();
+            builder.Services.AddTransient<Cart>();
+            builder.Services.AddTransient<Orders>();
+            builder.Services.AddTransient<Buy>();
 
             return builder;
         }
@@ -54,6 +61,13 @@ namespace Client_ReWear
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
             builder.Services.AddTransient<HomeViewModel>();
+            builder.Services.AddTransient<AdminPageViewModel>();
+            builder.Services.AddTransient<WishlistViewModel>();
+            builder.Services.AddTransient<PostViewModel>();
+            builder.Services.AddTransient<ProfileViewModel>();
+            builder.Services.AddTransient<CartViewModel>();
+            builder.Services.AddTransient<OrdersViewModel>();
+            builder.Services.AddTransient<BuyViewModel>();
             return builder;
         }
     }
