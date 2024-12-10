@@ -137,7 +137,41 @@ public class ReWearWebAPI
     }
 
 
-
+    public async Task<User?> UploadProfileImage(string imagePath)
+    {
+        //Set URI to the specific function API
+        string url = $"{this.baseUrl}uploadprofileimage";
+        try
+        {
+            //Create the form data
+            MultipartFormDataContent form = new MultipartFormDataContent();
+            var fileContent = new ByteArrayContent(File.ReadAllBytes(imagePath));
+            form.Add(fileContent, "file", imagePath);
+            //Call the server API
+            HttpResponseMessage response = await client.PostAsync(url, form);
+            //Check status
+            if (response.IsSuccessStatusCode)
+            {
+                //Extract the content as string
+                string resContent = await response.Content.ReadAsStringAsync();
+                //Desrialize result
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                User? result = JsonSerializer.Deserialize<User>(resContent, options);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
 
 
 }

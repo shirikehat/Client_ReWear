@@ -19,6 +19,29 @@
 
             <!-- Main Content -->
             <VerticalStackLayout IsEnabled="{Binding NotInServerCall}" Padding="20">
+                <!-- Photo -->
+                <Frame BorderColor="Black" Padding="5" Margin="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image x:Name="theImageBug" Source="{Binding PhotoURL}"  HeightRequest="150"/>
+                        <Label Grid.Row="1"
+                               Text="Click Here To Upload Photo!"
+                               FontFamily="SA"
+                               TextColor="Blue"
+                               HorizontalOptions="Center"
+                               VerticalOptions="End">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding UploadPhotoCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </Frame>
 
                 <!-- User Name -->
                 <Grid>
@@ -77,8 +100,8 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Button Text="Register" FontFamily="SA" Command="{Binding RegisterCommand}" IsEnabled="{Binding NotInServerCall}" Grid.Column="1" Style="{StaticResource buttonStyle}" />
-                    <Button Text="Cancel" FontFamily="SA" Command="{Binding CancelCommand}" IsEnabled="{Binding NotInServerCall}" Grid.Column="0" Style="{StaticResource buttonStyle}"/>
+                    <Button Text="Register" FontFamily="SA" BackgroundColor="LightPink"  Command="{Binding RegisterCommand}" IsEnabled="{Binding NotInServerCall}" Grid.Column="1" Style="{StaticResource buttonStyle}" />
+                    <Button Text="Cancel" FontFamily="SA" BackgroundColor="LightPink" Command="{Binding CancelCommand}" IsEnabled="{Binding NotInServerCall}" Grid.Column="0" Style="{StaticResource buttonStyle}"/>
                 </Grid>
             </VerticalStackLayout>
             <!-- Centered ActivityIndicator -->
