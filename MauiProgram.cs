@@ -69,6 +69,7 @@ namespace Client_ReWear
             builder.Services.AddTransient<CartViewModel>();
             builder.Services.AddTransient<OrdersViewModel>();
             builder.Services.AddTransient<BuyViewModel>();
+            builder.Services.AddTransient<AppShellViewModel>();
             return builder;
         }
     }

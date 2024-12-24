@@ -70,6 +70,11 @@
 	  <None Remove="Resources\Fonts\Klhamer.otf" />
 	  <None Remove="Resources\Fonts\Library School.otf" />
 	  <None Remove="Resources\Fonts\Sweet Autumn.otf" />
+	  <None Remove="Resources\Images\cart.png" />
+	  <None Remove="Resources\Images\home.png" />
+	  <None Remove="Resources\Images\post.png" />
+	  <None Remove="Resources\Images\profile.png" />
+	  <None Remove="Resources\Images\wishlist.png" />
 	</ItemGroup>
 
 	<ItemGroup>

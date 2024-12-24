@@ -4,12 +4,39 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Client_ReWear"
-    Shell.FlyoutBehavior="Disabled"
+    xmlns:views="clr-namespace:Client_ReWear.Views"
+    Shell.FlyoutBehavior="Flyout"
     Title="Client_ReWear">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Route="tabs">
+        <ShellContent 
+            Title="cart" Icon="cart.png"
+            ContentTemplate="{DataTemplate views:Cart}"
+            Route="Cart"/>
+        <ShellContent
+            Title="Post" Icon="post.png"
+            ContentTemplate="{DataTemplate views:Post}"
+            Route="Post" />
+        <ShellContent
+            Title="Profile" Icon="profile.png"
+            ContentTemplate="{DataTemplate views:Profile}"
+            Route="Profile" />
+        <ShellContent
+            Title="Home" Icon="home.png"
+            ContentTemplate="{DataTemplate views:Home}"
+            Route="Home"/>
+        <ShellContent IsVisible="{Binding IsManager}"
+            Title="Admin" Icon="admin.png"
+            ContentTemplate="{DataTemplate views:AdminPage}"
+            Route="Admin" />
+        <ShellContent
+            Title="Wishlist" Icon="wishlist.png"
+            ContentTemplate="{DataTemplate views:Wishlist}"
+            Route="Wishlist" />
+
+    </FlyoutItem>
+    
+    <MenuItem Text="Logout" Command="{Binding LogoutCommand}" />
+
 
 </Shell>

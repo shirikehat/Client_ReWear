@@ -104,7 +104,7 @@ public class LoginViewModel : ViewModelBase
             //homeViewModel.Refresh(); //Refresh data and user in the tasksview model as it is a singleton
             ((App)Application.Current).MainPage = shell;
             Shell.Current.FlyoutIsPresented = false; //close the flyout
-            Shell.Current.GoToAsync("Home"); //Navigate to the Home tab page
+            //Shell.Current.GoToAsync("Home"); //Navigate to the Home tab page
         }
     }
 
