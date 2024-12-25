@@ -9,30 +9,30 @@
     Title="Client_ReWear">
 
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Route="tabs">
+        <ShellContent
+            Title="Home" Icon="home.png"
+            ContentTemplate="{DataTemplate views:Home}"
+            Route="Home"/>
+        <ShellContent
+            Title="Wishlist" Icon="wishlist.png"
+            ContentTemplate="{DataTemplate views:Wishlist}"
+            Route="Wishlist" />
+        <ShellContent
+            Title="Post" Icon="post.png"
+            ContentTemplate="{DataTemplate views:Post}"
+            Route="Post" />
         <ShellContent 
             Title="cart" Icon="cart.png"
             ContentTemplate="{DataTemplate views:Cart}"
             Route="Cart"/>
         <ShellContent
-            Title="Post" Icon="post.png"
-            ContentTemplate="{DataTemplate views:Post}"
-            Route="Post" />
-        <ShellContent
             Title="Profile" Icon="profile.png"
             ContentTemplate="{DataTemplate views:Profile}"
             Route="Profile" />
-        <ShellContent
-            Title="Home" Icon="home.png"
-            ContentTemplate="{DataTemplate views:Home}"
-            Route="Home"/>
         <ShellContent IsVisible="{Binding IsManager}"
             Title="Admin" Icon="admin.png"
             ContentTemplate="{DataTemplate views:AdminPage}"
             Route="Admin" />
-        <ShellContent
-            Title="Wishlist" Icon="wishlist.png"
-            ContentTemplate="{DataTemplate views:Wishlist}"
-            Route="Wishlist" />
 
     </FlyoutItem>
     
