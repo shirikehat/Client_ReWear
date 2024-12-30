@@ -10,7 +10,7 @@ public class User
     public string Phone { get; set; } = null!;
     public string Email { get; set; } = null!;
     public bool IsManager { get; set; }
-   
 
+    public string ProfileImagePath { get; set; } = "";
     public User() { }
 }

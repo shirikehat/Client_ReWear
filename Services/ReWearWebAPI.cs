@@ -23,7 +23,7 @@ public class ReWearWebAPI
 
     // כתובת הבסיס לכתובת השרת מותאמת לפי פלטפורמות ההרצה
     public static string BaseAddress = "https://jfzd1hz5-5094.euw.devtunnels.ms/api/";
-    public static string ImageBaseAddress = "https://jfzd1hz5-5094.euw.devtunnels.ms/images/";
+    public static string ImageBaseAddress = "https://jfzd1hz5-5094.euw.devtunnels.ms";
 
     #endregion
 
@@ -173,5 +173,63 @@ public class ReWearWebAPI
         }
     }
 
+    public async Task<bool> UpdateUser(User user)
+    {
+        //Set URI to the specific function API
+        string url = $"{this.baseUrl}updateuser";
+        try
+        {
+            //Call the server API
+            string json = JsonSerializer.Serialize(user);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync(url, content);
+            //Check status
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
+
+    public async Task<List<Product>?> GetProducts()
+    {
+        //Set URI to the specific function API
+        string url = $"{this.baseUrl}GetProducts";
+        try
+        {
+            //Call the server API
+            HttpResponseMessage response = await client.GetAsync(url);
+            //Check status
+            if (response.IsSuccessStatusCode)
+            {
+                //Extract the content as string
+                string resContent = await response.Content.ReadAsStringAsync();
+                //Desrialize result
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                List<Product>? result = JsonSerializer.Deserialize<List<Product>>(resContent, options);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
 
 }

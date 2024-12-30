@@ -5,11 +5,41 @@
              x:Class="Client_ReWear.Views.Profile"
              Title="Profile"
               x:DataType="viewmodel:ProfileViewModel">
-    
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+
+    <VerticalStackLayout VerticalOptions="FillAndExpand">
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Frame CornerRadius="30" BorderColor="Black" Grid.Column="0" Grid.Row="0">
+            <Image Source="{Binding PhotoURL}" WidthRequest="200"></Image>
+            </Frame>
+            <Label
+            FontFamily="SA"
+            FontSize="50"
+            HorizontalOptions="Start"
+            Text="{Binding Name}"
+            Grid.Column="1"
+            />
+        </Grid>
+
+
+
+        <!--<CollectionView ItemsSource="{Binding Products}"  ItemsLayout="VerticalGrid, 2"
+                    SelectionMode="Single"
+                    SelectedItem="{Binding SelectedProduct}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding ProductPicturePath}" Aspect="AspectFill"
+                     HeightRequest="200"
+                     WidthRequest="200"/>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>-->
+
+
     </VerticalStackLayout>
 </ContentPage>

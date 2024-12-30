@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client_ReWear.Models
 {
-    internal class Product
+    public class Product
     {
         public int ProductCode { get; set; }
 
