@@ -13,7 +13,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Frame CornerRadius="30" BorderColor="Black" Grid.Column="0" Grid.Row="0">
+            <Frame CornerRadius="50" Margin="10" BorderColor="Black" Grid.Column="0" Grid.Row="0">
             <Image Source="{Binding PhotoURL}" WidthRequest="200"></Image>
             </Frame>
             <Label
@@ -27,18 +27,18 @@
 
 
 
-        <!--<CollectionView ItemsSource="{Binding Products}"  ItemsLayout="VerticalGrid, 2"
+        <CollectionView ItemsSource="{Binding Products}"  ItemsLayout="VerticalGrid, 3"
                     SelectionMode="Single"
                     SelectedItem="{Binding SelectedProduct}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Image Source="{Binding ProductPicturePath}" Aspect="AspectFill"
+                    <Image Source="{Binding ProductImagePath}" Aspect="AspectFill"
                      HeightRequest="200"
                      WidthRequest="200"/>
 
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-        </CollectionView>-->
+        </CollectionView>
 
 
     </VerticalStackLayout>

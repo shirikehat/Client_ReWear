@@ -70,11 +70,17 @@
 	  <None Remove="Resources\Fonts\Klhamer.otf" />
 	  <None Remove="Resources\Fonts\Library School.otf" />
 	  <None Remove="Resources\Fonts\Sweet Autumn.otf" />
+	  <None Remove="Resources\Images\admin.png" />
 	  <None Remove="Resources\Images\cart.png" />
+	  <None Remove="Resources\Images\cart1.png" />
 	  <None Remove="Resources\Images\home.png" />
+	  <None Remove="Resources\Images\home1.png" />
 	  <None Remove="Resources\Images\post.png" />
+	  <None Remove="Resources\Images\post1.png" />
 	  <None Remove="Resources\Images\profile.png" />
+	  <None Remove="Resources\Images\profile1.png" />
 	  <None Remove="Resources\Images\wishlist.png" />
+	  <None Remove="Resources\Images\wishlist1.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -103,6 +109,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Post.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ProductPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Profile.xaml">

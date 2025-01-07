@@ -18,8 +18,9 @@ namespace Client_ReWear.Models
 
         public int StatusId { get; set; } 
 
-        public int TypeId { get; set; } 
+        public int TypeId { get; set; }
 
+        public string ProductImagePath { get; set; } = "";
         public Product() { }
     }
 }

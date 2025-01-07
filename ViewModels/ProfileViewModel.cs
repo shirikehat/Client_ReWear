@@ -43,6 +43,7 @@ public class ProfileViewModel : ViewModelBase
             foreach (Product p in products)
             {
                 Products.Add(p);
+                p.ProductImagePath = proxy.GetImagesBaseAddress() + p.ProductImagePath;
             }
         }
         this.Products = new ObservableCollection<Product>(products);

@@ -10,23 +10,23 @@
 
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Route="tabs">
         <ShellContent
-            Title="Home" Icon="home.png"
+            Title="Home" Icon="home1.png"
             ContentTemplate="{DataTemplate views:Home}"
             Route="Home"/>
         <ShellContent
-            Title="Wishlist" Icon="wishlist.png"
+            Title="Wishlist" Icon="wishlist1.png"
             ContentTemplate="{DataTemplate views:Wishlist}"
             Route="Wishlist" />
         <ShellContent
-            Title="Post" Icon="post.png"
+            Title="Post" Icon="post1.png"
             ContentTemplate="{DataTemplate views:Post}"
             Route="Post" />
         <ShellContent 
-            Title="cart" Icon="cart.png"
+            Title="cart" Icon="cart1.png"
             ContentTemplate="{DataTemplate views:Cart}"
             Route="Cart"/>
         <ShellContent
-            Title="Profile" Icon="profile.png"
+            Title="Profile" Icon="profile1.png"
             ContentTemplate="{DataTemplate views:Profile}"
             Route="Profile" />
         <ShellContent IsVisible="{Binding IsManager}"
