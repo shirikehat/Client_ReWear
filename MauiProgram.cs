@@ -49,6 +49,7 @@ namespace Client_ReWear
             builder.Services.AddTransient<Orders>();
             builder.Services.AddTransient<Buy>();
             builder.Services.AddTransient<ProductPage>();
+            builder.Services.AddTransient<EditProfile>();
 
             return builder;
         }
@@ -72,6 +73,7 @@ namespace Client_ReWear
             builder.Services.AddTransient<BuyViewModel>();
             builder.Services.AddTransient<AppShellViewModel>();
             builder.Services.AddTransient<ProductPageViewModel>();
+            builder.Services.AddTransient<EditProfileViewModel>();
             return builder;
         }
     }

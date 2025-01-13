@@ -1,45 +1,68 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodel="clr-namespace:Client_ReWear.ViewModels"
-             x:Class="Client_ReWear.Views.Profile"
-             Title="Profile"
-              x:DataType="viewmodel:ProfileViewModel">
+<ContentPage
+    x:Class="Client_ReWear.Views.Profile"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:Client_ReWear.Models"
+    xmlns:viewmodel="clr-namespace:Client_ReWear.ViewModels"
+    Title="Profile"
+    x:DataType="viewmodel:ProfileViewModel">
+    <ScrollView>
 
-    <VerticalStackLayout VerticalOptions="FillAndExpand">
-
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Frame CornerRadius="50" Margin="10" BorderColor="Black" Grid.Column="0" Grid.Row="0">
-            <Image Source="{Binding PhotoURL}" WidthRequest="200"></Image>
-            </Frame>
-            <Label
+        <VerticalStackLayout>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Frame CornerRadius="50" Margin="10" BorderColor="Black" Grid.Column="0" Grid.Row="0">
+                    <Image Source="{Binding PhotoURL}" WidthRequest="200"></Image>
+                </Frame>
+                <Label
             FontFamily="SA"
             FontSize="50"
             HorizontalOptions="Start"
             Text="{Binding Name}"
             Grid.Column="1"
             />
-        </Grid>
+            </Grid>
+
+            <StackLayout Margin="0,40,0,0" HorizontalOptions="Center">
+                
+                <Label
+        FontAttributes="Bold"
+    FontSize="Medium"
+       
+    HorizontalOptions="Center"
+        Text="edit profile"
+    FontFamily="SA"
+        TextColor="Blue"
+        >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding EditCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+
+            <CollectionView
+                ItemsLayout="VerticalGrid, 3"
+                ItemsSource="{Binding Products}"
+                SelectedItem="{Binding SelectedProduct}"
+                SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Product">
+                        <Image
+                            Aspect="AspectFill"
+                            HeightRequest="200"
+                            Source="{Binding FullImagePath}"
+                            WidthRequest="200" />
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
 
+        </VerticalStackLayout>
 
-        <CollectionView ItemsSource="{Binding Products}"  ItemsLayout="VerticalGrid, 3"
-                    SelectionMode="Single"
-                    SelectedItem="{Binding SelectedProduct}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Image Source="{Binding ProductImagePath}" Aspect="AspectFill"
-                     HeightRequest="200"
-                     WidthRequest="200"/>
-
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-
-    </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

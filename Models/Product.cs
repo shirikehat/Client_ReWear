@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Client_ReWear.Services;
 namespace Client_ReWear.Models
 {
     public class Product
@@ -21,6 +21,16 @@ namespace Client_ReWear.Models
         public int TypeId { get; set; }
 
         public string ProductImagePath { get; set; } = "";
-        public Product() { }
+        public string FullImagePath
+        {
+            get
+            {
+                return ReWearWebAPI.ImageBaseAddress + ProductImagePath;
+            }
+        }
+        public Product() 
+        {
+            
+        }
     }
 }
