@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Client_ReWear"
     xmlns:views="clr-namespace:Client_ReWear.Views"
+    xmlns:viewmodels="clr-namespace:Client_ReWear.ViewModels"
     Shell.FlyoutBehavior="Flyout"
     Title="Client_ReWear">
 

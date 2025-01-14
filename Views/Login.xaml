@@ -27,6 +27,8 @@
             FontFamily="SA"
         Text="{Binding Password}" />
 
+        <Label Text="{Binding ErrorMsg}" Style="{StaticResource labelErrorStyle}" TextColor="Red" FontFamily="SA"/>
+
         <HorizontalStackLayout HorizontalOptions="Center">
             <Button
                     Command="{Binding LoginCommand}"
