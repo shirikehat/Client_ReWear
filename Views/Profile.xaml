@@ -15,31 +15,36 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Frame CornerRadius="50" Margin="10" BorderColor="Black" Grid.Column="0" Grid.Row="0">
-                    <Image Source="{Binding PhotoURL}" WidthRequest="200"></Image>
+                <Frame
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="5"
+                    BorderColor="Black"
+                    CornerRadius="70"
+                    HeightRequest="100"
+                    HorizontalOptions="Start"
+                    WidthRequest="100">
+                    <Image Source="{Binding PhotoURL}" WidthRequest="200" />
                 </Frame>
                 <Label
-            FontFamily="SA"
-            FontSize="50"
-            HorizontalOptions="Start"
-            Text="{Binding Name}"
-            Grid.Column="1"
-            />
+                    Grid.Column="1"
+                    FontFamily="SA"
+                    FontSize="50"
+                    HorizontalOptions="Start"
+                    Text="{Binding Name}" />
             </Grid>
 
             <StackLayout Margin="0,40,0,0" HorizontalOptions="Center">
-                
+
                 <Label
-        FontAttributes="Bold"
-    FontSize="Medium"
-       
-    HorizontalOptions="Center"
-        Text="edit profile"
-    FontFamily="SA"
-        TextColor="Blue"
-        >
+                    FontAttributes="Bold"
+                    FontFamily="SA"
+                    FontSize="Medium"
+                    HorizontalOptions="Center"
+                    Text="edit profile"
+                    TextColor="Blue">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding EditCommand}"/>
+                        <TapGestureRecognizer Command="{Binding EditCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
             </StackLayout>

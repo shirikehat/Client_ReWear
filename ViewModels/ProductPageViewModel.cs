@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Client_ReWear.Models;
 using Client_ReWear.Services;
 
+
 namespace Client_ReWear.ViewModels
 {
     public class ProductPageViewModel:ViewModelBase
@@ -39,6 +40,12 @@ namespace Client_ReWear.ViewModels
         {
             this.serviceProvider = serviceProvider;
             this.proxy = proxy;
+            User u = ((App)Application.Current).LoggedInUser;
+            Product pr = ((App)Application.Current).ThisProduct;
+            Username = u.UserName;
+            PhotoURL = u.FullProfileImageUrl;
+            ProductURL = pr.FullImagePath;
+            LocalPhotoPath = "";
             CartCommand = new Command(OnCart);
             WishlistCommand = new Command(OnWishlist);
             
@@ -85,7 +92,7 @@ namespace Client_ReWear.ViewModels
         }
         #endregion
 
-        #region PostImage
+        #region ProductImage
 
         private string productURL;
 
@@ -134,6 +141,17 @@ namespace Client_ReWear.ViewModels
             }
         }
 
+
+        private string desc;
+        public string Desc
+        {
+            get => desc;
+            set
+            {
+                desc = value;
+                OnPropertyChanged("Desc");
+            }
+        }
 
         #region In it Fields with data
         //Define a method to initialize the fields with data

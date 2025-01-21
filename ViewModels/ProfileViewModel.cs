@@ -17,6 +17,8 @@ public class ProfileViewModel : ViewModelBase
         this.proxy = proxy;
         Products = new ObservableCollection<Product>();
         User u = ((App)Application.Current).LoggedInUser;
+        Name = u.UserName;
+        PhotoURL = u.FullProfileImageUrl;
         LocalPhotoPath = "";
         InServerCall = false;
         ReadDataFromServer();
@@ -42,24 +44,32 @@ public class ProfileViewModel : ViewModelBase
         
         if (products != null)
         {
+            Products.Clear();
             foreach (Product p in products)
             {
                 Products.Add(p);
-                p.ProductImagePath = proxy.GetImagesBaseAddress() + p.ProductImagePath;
             }
         }
-        this.Products = new ObservableCollection<Product>(products);
+        
     }
     #endregion
 
 
     #region Name
     private string name;
-    public string Name { get; set; }
-    
+    public string Name
+    {
+        get => name;
+        set
+        {
+            name = value;
+            OnPropertyChanged(nameof(Name));
+        }
+    }
+
     #endregion
-    
-    
+
+
     #region Photo
 
     private string photoURL;

@@ -1,3 +1,5 @@
+using Client_ReWear.Services;
+
 namespace Client_ReWear.Models;
 
 public class User
@@ -12,5 +14,13 @@ public class User
     public bool IsManager { get; set; }
 
     public string ProfileImagePath { get; set; } = "";
+
+    public string FullProfileImageUrl 
+    { 
+        get
+        {
+            return ReWearWebAPI.ImageBaseAddress + ProfileImagePath;
+        }
+    }
     public User() { }
 }

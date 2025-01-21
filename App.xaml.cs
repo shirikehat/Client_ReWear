@@ -11,6 +11,8 @@ namespace Client_ReWear
 
         //Application level variables
         public User? LoggedInUser { get; set; }
+        public Product? ThisProduct { get; set; }
+
         private ReWearWebAPI proxy;
 
         public App(IServiceProvider serviceProvider)

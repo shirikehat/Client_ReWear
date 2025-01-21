@@ -1,14 +1,35 @@
-﻿<?xml version = "1.0" encoding = "UTF-8" ?>
-<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Client_ReWear"
-             x:Class="Client_ReWear.App">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Application
+    x:Class="Client_ReWear.App"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Client_ReWear">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="labelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontFamily" Value="SA" />
+            </Style>
+
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="LightPink" />
+                <Setter Property="FontFamily" Value="SA" />
+            </Style>
+
+            <Style x:Key="title" TargetType="Label">
+                <Setter Property="TextColor" Value="LightPink" />
+                <Setter Property="FontFamily" Value="Klhamer" />
+            </Style>
+            <Style x:Key="error" TargetType="Label">
+                <Setter Property="TextColor" Value="red" />
+                <Setter Property="FontFamily" Value="SA" />
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
