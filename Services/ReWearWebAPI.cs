@@ -172,6 +172,7 @@ public class ReWearWebAPI
     }
 
 
+
     public async Task<User?> UploadProfileImage(string imagePath)
     {
         //Set URI to the specific function API
@@ -327,6 +328,101 @@ public class ReWearWebAPI
                     PropertyNameCaseInsensitive = true
                 };
                 List<Product>? result = JsonSerializer.Deserialize<List<Product>>(resContent, options);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
+
+
+
+    public async Task<Product> GetProduct(int productCode)
+    {
+        //Set URI to the specific function API
+        string url = $"{this.baseUrl}GetProduct?ProductCode={productCode}";
+        try
+        {
+            HttpResponseMessage response = await client.GetAsync(url);
+            //Check status
+            if (response.IsSuccessStatusCode)
+            {
+                //Extract the content as string
+                string resContent = await response.Content.ReadAsStringAsync();
+                //Desrialize result
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                Product result = JsonSerializer.Deserialize<Product>(resContent, options);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
+
+    public async Task<PrType> GetType(int typeId)
+    {
+        //Set URI to the specific function API
+        string url = $"{this.baseUrl}GetType?typeId={typeId}";
+        try
+        {
+            HttpResponseMessage response = await client.GetAsync(url);
+            //Check status
+            if (response.IsSuccessStatusCode)
+            {
+                //Extract the content as string
+                string resContent = await response.Content.ReadAsStringAsync();
+                //Desrialize result
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                PrType result = JsonSerializer.Deserialize<PrType>(resContent, options);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
+
+    public async Task<Status> GetStatus(int statusId)
+    {
+        //Set URI to the specific function API
+        string url = $"{this.baseUrl}GetStatus?statusId={statusId}";
+        try
+        {
+            HttpResponseMessage response = await client.GetAsync(url);
+            //Check status
+            if (response.IsSuccessStatusCode)
+            {
+                //Extract the content as string
+                string resContent = await response.Content.ReadAsStringAsync();
+                //Desrialize result
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                Status result = JsonSerializer.Deserialize<Status>(resContent, options);
                 return result;
             }
             else

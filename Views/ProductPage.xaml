@@ -18,10 +18,23 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Frame CornerRadius="50" HeightRequest="60" WidthRequest="60" HorizontalOptions="Start" Margin="5" Grid.Column="0">
-                    <ImageButton Source="{Binding PhotoURL}" Command="{Binding ProfileCommand}" CornerRadius="50" HeightRequest="60" WidthRequest="60" />
+                <Frame
+    Grid.Row="0"
+    Grid.Column="0"
+    Margin="5"
+    BorderColor="Black"
+    CornerRadius="50"
+    HeightRequest="50"
+    HorizontalOptions="Start"
+    WidthRequest="50">
+                    <Image Source="{Binding PhotoURL}" WidthRequest="100" />
                 </Frame>
-                <Label Text="{Binding Username}" Grid.Column="1" FontSize="Title" FontFamily="SA"/>
+                <Label
+    Grid.Column="1"
+    FontFamily="SA"
+    FontSize="30"
+    HorizontalOptions="Start"
+    Text="{Binding Username}" />
             </Grid>
 
             <Grid>
@@ -33,9 +46,9 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Image Source="{Binding ProductURL}" HeightRequest="500" WidthRequest="500" />
+                <Image Source="{Binding ProductURL}" HeightRequest="400" WidthRequest="400" />
 
-             
+
             </Grid>
 
             <Grid>
@@ -55,15 +68,20 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                
+
 
                 <ImageButton Source="wishlist1.png" Command="{Binding WishlistCommand}" CornerRadius="50" HeightRequest="40" WidthRequest="40" Grid.Column="0" Grid.Row="1"/>
-                
+                <Label FontFamily="SA" Text="add to wishlist" Grid.Column="1" Grid.Row="1"/>
+
+                <ImageButton Source="cart1.png" Command="{Binding CartCommand}" CornerRadius="50" HeightRequest="40" WidthRequest="40" Grid.Column="4" Grid.Row="1"/>
+                <Label FontFamily="SA" Text="add to cart" Grid.Column="5" Grid.Row="1"/>
             </Grid>
 
-            <Label Text="{Binding Price}" FontSize="Medium" FontFamily="SA"/>
-            <Label Text="{Binding Size}" FontSize="Medium" FontFamily="SA"/>
-            <Label Text="{Binding Desc}" FontSize="Medium" FontFamily="SA"/>
+            <Label Text="{Binding Price}" FontSize="Medium" FontFamily="SA" TextColor="Black"/>
+            <Label Text="{Binding Size}" FontSize="Medium" FontFamily="SA" TextColor="Black"/>
+            <Label Text="{Binding Desc}" FontSize="Medium" FontFamily="SA" TextColor="Black"/>
+            <Label Text="{Binding Store}" FontSize="Medium" FontFamily="SA" TextColor="Black"/>
+            <Label Text="{Binding Status}" FontSize="Medium" FontFamily="SA" TextColor="Black"/>
 
         </VerticalStackLayout>
     </ScrollView>

@@ -51,17 +51,20 @@
 
             <CollectionView
                 ItemsLayout="VerticalGrid, 3"
+                
                 ItemsSource="{Binding Products}"
                 SelectedItem="{Binding SelectedProduct}"
                 SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Product">
-                        <Image
+                        
+                            <Image
                             Aspect="AspectFill"
                             HeightRequest="200"
+                            Margin="5"
                             Source="{Binding FullImagePath}"
                             WidthRequest="200" />
-
+                        
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

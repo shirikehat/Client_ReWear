@@ -9,14 +9,13 @@ using Client_ReWear.Models;
 using Client_ReWear.Services;
 
 
+
 namespace Client_ReWear.ViewModels
 {
     public class ProductPageViewModel:ViewModelBase
     {
         public ReWearWebAPI proxy;
         private readonly IServiceProvider serviceProvider;
-
-
 
 
         private Product product;
@@ -34,25 +33,90 @@ namespace Client_ReWear.ViewModels
             }
         }
 
-
-
         public ProductPageViewModel(ReWearWebAPI proxy, IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
             this.proxy = proxy;
-            User u = ((App)Application.Current).LoggedInUser;
-            Product pr = ((App)Application.Current).ThisProduct;
-            Username = u.UserName;
-            PhotoURL = u.FullProfileImageUrl;
-            ProductURL = pr.FullImagePath;
+
+            
+
             LocalPhotoPath = "";
             CartCommand = new Command(OnCart);
             WishlistCommand = new Command(OnWishlist);
             
         }
 
+        #region productvals
 
-        public int Price { get; set; }
+        private int price;
+        public int Price
+        {
+            get => price;
+            set
+            {
+                price = value;
+                OnPropertyChanged(nameof(Price));
+            }
+        }
+
+        private string size;
+        public string Size
+        {
+            get => size;
+            set
+            {
+                size = value;
+                OnPropertyChanged(nameof(Size));
+            }
+        }
+
+        private string status;
+        public string Status
+        {
+            get => status;
+            set
+            {
+                status = value;
+                OnPropertyChanged(nameof(Status));
+            }
+        }
+
+        private string type;
+        public string Type
+        {
+            get => type;
+            set
+            {
+                type = value;
+                OnPropertyChanged(nameof(Type));
+            }
+        }
+
+
+        private string desc;
+        public string Desc
+        {
+            get => desc;
+            set
+            {
+                desc = value;
+                OnPropertyChanged(nameof(Desc));
+            }
+        }
+
+
+        private string store;
+        public string Store
+        {
+            get => store;
+            set
+            {
+                store = value;
+                OnPropertyChanged(nameof(Store));
+            }
+        }
+        #endregion
+
 
         private string username;
         public string Username
@@ -61,7 +125,7 @@ namespace Client_ReWear.ViewModels
             set
             {
                 username = value;
-                OnPropertyChanged("Username");
+                OnPropertyChanged(nameof(Username));
             }
         }
 
@@ -75,7 +139,7 @@ namespace Client_ReWear.ViewModels
             set
             {
                 photoURL = value;
-                OnPropertyChanged("PhotoURL");
+                OnPropertyChanged(nameof(PhotoURL));
             }
         }
 
@@ -87,7 +151,7 @@ namespace Client_ReWear.ViewModels
             set
             {
                 localPhotoPath = value;
-                OnPropertyChanged("LocalPhotoPath");
+                OnPropertyChanged(nameof(LocalPhotoPath));
             }
         }
         #endregion
@@ -102,7 +166,7 @@ namespace Client_ReWear.ViewModels
             set
             {
                 productURL = value;
-                OnPropertyChanged("ProductURL");
+                OnPropertyChanged(nameof(productURL));
             }
         }
 
@@ -123,35 +187,9 @@ namespace Client_ReWear.ViewModels
 
         }
         #endregion
+        
 
 
-
-        public string Size { get; set; }
-
-        public int StatusId { get; set; }
-
-        private string type;
-        public string Type
-        {
-            get => type;
-            set
-            {
-                type = value;
-                OnPropertyChanged("Type");
-            }
-        }
-
-
-        private string desc;
-        public string Desc
-        {
-            get => desc;
-            set
-            {
-                desc = value;
-                OnPropertyChanged("Desc");
-            }
-        }
 
         #region In it Fields with data
         //Define a method to initialize the fields with data
@@ -159,12 +197,23 @@ namespace Client_ReWear.ViewModels
         private async void InItFieldsDataAsync()
         {
             int userId = (int)product.UserId;
+            int typeId = (int)product.TypeId;
+            int statusId = (int)product.StatusId;
+            int productId = (int)product.ProductCode;
             User u = await proxy.GetUser(userId);
+            PrType t = await proxy.GetType(typeId);
+            Status s = await proxy.GetStatus(statusId);
 
-            ProductURL = product.ProductImagePath;
-           
+
+            ProductURL = product.FullImagePath;
             Username = u.UserName;
-            PhotoURL = u.ProfileImagePath;
+            PhotoURL = u.FullProfileImageUrl;
+            Size = product.Size;
+            Price = product.Price;
+            Type = t.Name;
+            Status = s.Name;
+            Desc = product.Description;
+            Store = product.Store;
 
         }
         #endregion
@@ -173,14 +222,19 @@ namespace Client_ReWear.ViewModels
         public ICommand CartCommand { get; }
         public ICommand WishlistCommand { get; }
 
-        private void OnCart()
+        private async void OnCart()
         {
 
+            //If the add succeed, display a message
+            string Msg = "added product to cart!";
+            await Application.Current.MainPage.DisplayAlert("cart", Msg, "ok");
         }
 
-        private void OnWishlist()
+        private async void OnWishlist()
         {
-
+            //If the add succeed, display a message
+            string Msg = "added product to wishlist!";
+            await Application.Current.MainPage.DisplayAlert("wishlist", Msg, "ok");
         }
     }
 }
