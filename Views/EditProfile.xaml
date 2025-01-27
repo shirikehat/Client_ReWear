@@ -85,7 +85,7 @@
                     </Grid.RowDefinitions>-->
                         <Label
                             Grid.Column="0"
-                            Style="{StaticResource labelNameStyle}"
+                            Style="{StaticResource labelStyle}"
                             Text="Username" />
                         <Label
                             Grid.Column="1"

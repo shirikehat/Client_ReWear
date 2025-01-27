@@ -15,6 +15,7 @@ namespace Client_ReWear.ViewModels
             this.serviceProvider = serviceProvider;
             this.proxy = proxy;
             EditCommand = new Command(OnEdit);
+            SaveCommand= new Command(OnSave);
             User u = ((App)Application.Current).LoggedInUser;
             User = u;
             LocalPhotoPath = "";

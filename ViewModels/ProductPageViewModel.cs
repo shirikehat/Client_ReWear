@@ -10,8 +10,9 @@ using Client_ReWear.Services;
 
 
 
-namespace Client_ReWear.ViewModels
-{
+namespace Client_ReWear.ViewModels;
+    [QueryProperty("Product", "selectedProduct")]
+
     public class ProductPageViewModel:ViewModelBase
     {
         public ReWearWebAPI proxy;
@@ -237,4 +238,4 @@ namespace Client_ReWear.ViewModels
             await Application.Current.MainPage.DisplayAlert("wishlist", Msg, "ok");
         }
     }
-}
+
