@@ -205,7 +205,7 @@ namespace Client_ReWear.ViewModels;
 
             ProductURL = product.FullImagePath;
             Username = product.UserName;
-            //PhotoURL = u.FullProfileImageUrl;
+            //PhotoURL = product.FullImagePathUser;
             Size = product.Size;
             Price = product.Price;
             PrType t = ((App)Application.Current).BasicData.PrTypes.Where(p => p.TypeCode == product.TypeId).FirstOrDefault();

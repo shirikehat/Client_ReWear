@@ -370,33 +370,27 @@ namespace Client_ReWear.ViewModels
             ValidatePassword();
             ValidatePhone();
 
-
+            User currentUser = ((App)App.Current).LoggedInUser;
             if (!ShowNameError && !ShowEmailError && !ShowPasswordError && !ShowPhoneError)
             {
                 //Update AppUser object with the data from the Edit form
-                User theUser = new User()
-                {
-                    UserName = Name,
-                    Email = Email,
-                    Password = Password,
-                    Phone = Phone,
-                };
 
-
+                currentUser.UserName = Name;
+                currentUser.Email = Email;
+                currentUser.Password = Password;
+                currentUser.Phone = Phone;
+                
 
                 //Call the Register method on the proxy to register the new user
                 InServerCall = true;
-                bool success = await proxy.UpdateUser(theUser);
+                bool success = await proxy.UpdateUser(currentUser);
 
                 Change = false;
                 //If the save was successful, navigate to the login page
                 if (success)
                 {
-                    User.Email = Email;
-                    User.Password = Password;
-                    User.Phone = Phone;
-                    User.UserName = Name;
-                    //Upload profile imae if needed
+                    
+                    //Upload profile image if needed
                     if (!string.IsNullOrEmpty(LocalPhotoPath))
                     {
                         User? updatedUser = await proxy.UploadProfileImage(LocalPhotoPath);

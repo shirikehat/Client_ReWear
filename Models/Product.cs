@@ -14,6 +14,7 @@ namespace Client_ReWear.Models
 
         public int UserId { get; set; } 
         public string UserName { get; set; }
+        public string UserProfile { get; set; } = "";
         public string Size { get; set; }
 
         public int StatusId { get; set; } 
@@ -28,6 +29,14 @@ namespace Client_ReWear.Models
             get
             {
                 return ReWearWebAPI.ImageBaseAddress + ProductImagePath;
+            }
+        }
+
+        public string FullImagePathUser
+        {
+            get
+            {
+                return ReWearWebAPI.ImageBaseAddress + UserProfile;
             }
         }
         public Product() 
