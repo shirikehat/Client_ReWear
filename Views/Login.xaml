@@ -36,7 +36,7 @@
                 FontFamily="SA"
                     WidthRequest="100"
                 FontSize="25"
-                
+                IsEnabled="{Binding NotInServerCall}"
                 BackgroundColor="Lightpink"
                />
             

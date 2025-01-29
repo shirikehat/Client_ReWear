@@ -13,7 +13,7 @@ namespace Client_ReWear.Models
         public int Price { get; set; } 
 
         public int UserId { get; set; } 
-
+        public string UserName { get; set; }
         public string Size { get; set; }
 
         public int StatusId { get; set; } 

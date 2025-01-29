@@ -68,6 +68,7 @@
                     <Button
                         Command="{Binding EditCommand}"
                         Style="{StaticResource buttonStyle}"
+                        IsEnabled="{Binding NotInServerCall}"
                         Text="Edit" />
 
 

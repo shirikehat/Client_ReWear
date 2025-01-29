@@ -14,39 +14,48 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    
+                   
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
                 <Frame
                     Grid.Row="0"
                     Grid.Column="0"
                     Margin="5"
                     BorderColor="Black"
-                    CornerRadius="70"
+                    CornerRadius="60"
                     HeightRequest="100"
                     HorizontalOptions="Start"
                     WidthRequest="100">
-                    <Image Source="{Binding PhotoURL}" WidthRequest="200" />
+                    <Image Source="{Binding PhotoURL}" WidthRequest="100" />
                 </Frame>
                 <Label
                     Grid.Column="1"
                     FontFamily="SA"
-                    FontSize="50"
+                    FontSize="45"
                     HorizontalOptions="Start"
                     Text="{Binding Name}" />
-            </Grid>
-
-            <StackLayout Margin="0,40,0,0" HorizontalOptions="Center">
-
                 <Label
                     FontAttributes="Bold"
                     FontFamily="SA"
                     FontSize="Medium"
                     HorizontalOptions="Center"
                     Text="edit profile"
-                    TextColor="Blue">
+                    TextColor="Blue"
+                    Grid.Column="1"
+                    Grid.Row="1">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding EditCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
+            </Grid>
+
+            <StackLayout Margin="0,0,0,0" HorizontalOptions="Center">
+
             </StackLayout>
 
             <CollectionView
@@ -54,16 +63,18 @@
                 
                 ItemsSource="{Binding Products}"
                 SelectedItem="{Binding SelectedProduct}"
-                SelectionMode="Single">
+                SelectionMode="Single"
+                
+                >
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Product">
                         
                             <Image
                             Aspect="AspectFill"
-                            HeightRequest="200"
+                            HeightRequest="130"
                             Margin="5"
                             Source="{Binding FullImagePath}"
-                            WidthRequest="200" />
+                            WidthRequest="130" />
                         
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

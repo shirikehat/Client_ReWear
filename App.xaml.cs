@@ -13,9 +13,10 @@ namespace Client_ReWear
         public User? LoggedInUser { get; set; }
         public Product? ThisProduct { get; set; }
 
+        public BasicData BasicData { get; set; }
         private ReWearWebAPI proxy;
 
-        public App(IServiceProvider serviceProvider)
+        public App(IServiceProvider serviceProvider, ReWearWebAPI proxy)
         {
             this.proxy = proxy;
             InitializeComponent();
@@ -23,6 +24,11 @@ namespace Client_ReWear
             LoggedInUser = null;
             //MainPage = new AppShell();
             MainPage = new NavigationPage( serviceProvider.GetService<Login>());
+        }
+
+        private async void LoadBasicData()
+        {
+            this.BasicData = await proxy.GetBasicData();
         }
     }
 }

@@ -195,23 +195,22 @@ namespace Client_ReWear.ViewModels;
         #region In it Fields with data
         //Define a method to initialize the fields with data
 
-        private async void InItFieldsDataAsync()
+        private void InItFieldsDataAsync()
         {
             int userId = (int)product.UserId;
             int typeId = (int)product.TypeId;
             int statusId = (int)product.StatusId;
             int productId = (int)product.ProductCode;
-            User u = await proxy.GetUser(userId);
-            PrType t = await proxy.GetType(typeId);
-            Status s = await proxy.GetStatus(statusId);
-
+            
 
             ProductURL = product.FullImagePath;
-            Username = u.UserName;
-            PhotoURL = u.FullProfileImageUrl;
+            Username = product.UserName;
+            //PhotoURL = u.FullProfileImageUrl;
             Size = product.Size;
             Price = product.Price;
+            PrType t = ((App)Application.Current).BasicData.PrTypes.Where(p => p.TypeCode == product.TypeId).FirstOrDefault();
             Type = t.Name;
+            Status s = ((App)Application.Current).BasicData.Statuses.Where(p => p.StatusCode == product.StatusId).FirstOrDefault();
             Status = s.Name;
             Desc = product.Description;
             Store = product.Store;
