@@ -11,230 +11,258 @@ using Client_ReWear.Services;
 
 
 namespace Client_ReWear.ViewModels;
-    [QueryProperty("Product", "selectedProduct")]
+[QueryProperty("Product", "selectedProduct")]
 
-    public class ProductPageViewModel:ViewModelBase
+public class ProductPageViewModel : ViewModelBase
+{
+    public ReWearWebAPI proxy;
+    private readonly IServiceProvider serviceProvider;
+
+
+    private Product product;
+    public Product Product
     {
-        public ReWearWebAPI proxy;
-        private readonly IServiceProvider serviceProvider;
-
-
-        private Product product;
-        public Product Product
+        get => product;
+        set
         {
-            get => product;
-            set
+            if (product != value)
             {
-                if (product != value)
-                {
-                    product = value;
-                    InItFieldsDataAsync();
-                    OnPropertyChanged(nameof(Product));
-                }
+                product = value;
+                InItFieldsDataAsync();
+                OnPropertyChanged(nameof(Product));
             }
         }
+    }
 
-        public ProductPageViewModel(ReWearWebAPI proxy, IServiceProvider serviceProvider)
+    public ProductPageViewModel(ReWearWebAPI proxy, IServiceProvider serviceProvider)
+    {
+        this.serviceProvider = serviceProvider;
+        this.proxy = proxy;
+
+
+
+        LocalPhotoPath = "";
+        CartCommand = new Command(OnCart);
+        WishlistCommand = new Command(OnWishlist);
+
+    }
+
+    #region productvals
+
+    private int price;
+    public int Price
+    {
+        get => price;
+        set
         {
-            this.serviceProvider = serviceProvider;
-            this.proxy = proxy;
-
-            
-
-            LocalPhotoPath = "";
-            CartCommand = new Command(OnCart);
-            WishlistCommand = new Command(OnWishlist);
-            
+            price = value;
+            OnPropertyChanged(nameof(Price));
         }
+    }
 
-        #region productvals
-
-        private int price;
-        public int Price
+    private string size;
+    public string Size
+    {
+        get => size;
+        set
         {
-            get => price;
-            set
-            {
-                price = value;
-                OnPropertyChanged(nameof(Price));
-            }
+            size = value;
+            OnPropertyChanged(nameof(Size));
         }
+    }
 
-        private string size;
-        public string Size
+    private string status;
+    public string Status
+    {
+        get => status;
+        set
         {
-            get => size;
-            set
-            {
-                size = value;
-                OnPropertyChanged(nameof(Size));
-            }
+            status = value;
+            OnPropertyChanged(nameof(Status));
         }
+    }
 
-        private string status;
-        public string Status
+    private string type;
+    public string Type
+    {
+        get => type;
+        set
         {
-            get => status;
-            set
-            {
-                status = value;
-                OnPropertyChanged(nameof(Status));
-            }
+            type = value;
+            OnPropertyChanged(nameof(Type));
         }
+    }
 
-        private string type;
-        public string Type
+
+    private string desc;
+    public string Desc
+    {
+        get => desc;
+        set
         {
-            get => type;
-            set
-            {
-                type = value;
-                OnPropertyChanged(nameof(Type));
-            }
+            desc = value;
+            OnPropertyChanged(nameof(Desc));
         }
+    }
 
 
-        private string desc;
-        public string Desc
+    private string store;
+    public string Store
+    {
+        get => store;
+        set
         {
-            get => desc;
-            set
-            {
-                desc = value;
-                OnPropertyChanged(nameof(Desc));
-            }
+            store = value;
+            OnPropertyChanged(nameof(Store));
         }
+    }
+    #endregion
 
 
-        private string store;
-        public string Store
+    private string username;
+    public string Username
+    {
+        get => username;
+        set
         {
-            get => store;
-            set
-            {
-                store = value;
-                OnPropertyChanged(nameof(Store));
-            }
+            username = value;
+            OnPropertyChanged(nameof(Username));
         }
-        #endregion
+    }
 
+    #region ProfileImage
 
-        private string username;
-        public string Username
+    private string photoURL;
+
+    public string PhotoURL
+    {
+        get => photoURL;
+        set
         {
-            get=> username;
-            set
-            {
-                username = value;
-                OnPropertyChanged(nameof(Username));
-            }
+            photoURL = value;
+            OnPropertyChanged(nameof(PhotoURL));
         }
+    }
 
-        #region ProfileImage
+    private string localPhotoPath;
 
-        private string photoURL;
-
-        public string PhotoURL
+    public string LocalPhotoPath
+    {
+        get => localPhotoPath;
+        set
         {
-            get => photoURL;
-            set
-            {
-                photoURL = value;
-                OnPropertyChanged(nameof(PhotoURL));
-            }
+            localPhotoPath = value;
+            OnPropertyChanged(nameof(LocalPhotoPath));
         }
+    }
+    #endregion
 
-        private string localPhotoPath;
+    #region ProductImage
 
-        public string LocalPhotoPath
+    private string productURL;
+
+    public string ProductURL
+    {
+        get => productURL;
+        set
         {
-            get => localPhotoPath;
-            set
-            {
-                localPhotoPath = value;
-                OnPropertyChanged(nameof(LocalPhotoPath));
-            }
+            productURL = value;
+            OnPropertyChanged(nameof(productURL));
         }
-        #endregion
+    }
 
-        #region ProductImage
-
-        private string productURL;
-
-        public string ProductURL
+    public ICommand ProfileCommand { get; }
+    public async void OnProfile(User p)
+    {
+        if (p != null)
         {
-            get => productURL;
-            set
-            {
-                productURL = value;
-                OnPropertyChanged(nameof(productURL));
-            }
-        }
-
-        public ICommand ProfileCommand { get; }
-        public async void OnProfile(User p)
-        {
-            if (p != null)
-            {
-                var navParam = new Dictionary<string, object>
+            var navParam = new Dictionary<string, object>
                 {
                     {"selectedUser",p }
                 };
-                await Shell.Current.GoToAsync("ProfileView", navParam);
-                //SelectedPost = null;
-
-            }
-
+            await Shell.Current.GoToAsync("ProfileView", navParam);
+            //SelectedPost = null;
 
         }
-        #endregion
+
+
+    }
+    #endregion
+
+
+
+
+    #region In it Fields with data
+    //Define a method to initialize the fields with data
+
+    private void InItFieldsDataAsync()
+    {
+        int userId = (int)product.UserId;
+        int typeId = (int)product.TypeId;
+        int statusId = (int)product.StatusId;
+        int productId = (int)product.ProductCode;
+
+
+        ProductURL = product.FullImagePath;
+        Username = product.UserName;
+        //PhotoURL = product.FullImagePathUser;
+        Size = product.Size;
+        Price = product.Price;
+        PrType t = ((App)Application.Current).BasicData.PrTypes.Where(p => p.TypeCode == product.TypeId).FirstOrDefault();
+        Type = t.Name;
+        Status s = ((App)Application.Current).BasicData.Statuses.Where(p => p.StatusCode == product.StatusId).FirstOrDefault();
+        Status = s.Name;
+        Desc = product.Description;
+        Store = product.Store;
+
+    }
+    #endregion
+
+
+    public ICommand CartCommand { get; }
+    public ICommand WishlistCommand { get; }
+
+    private async void OnCart()
+    {
+        InServerCall = true;
+
+        User? u = ((App)Application.Current).LoggedInUser;
         
+        bool worked= await this.proxy.AddProToCartAsync(product);
+        InServerCall = false;
 
-
-
-        #region In it Fields with data
-        //Define a method to initialize the fields with data
-
-        private void InItFieldsDataAsync()
+        if (!worked)
         {
-            int userId = (int)product.UserId;
-            int typeId = (int)product.TypeId;
-            int statusId = (int)product.StatusId;
-            int productId = (int)product.ProductCode;
-            
-
-            ProductURL = product.FullImagePath;
-            Username = product.UserName;
-            //PhotoURL = product.FullImagePathUser;
-            Size = product.Size;
-            Price = product.Price;
-            PrType t = ((App)Application.Current).BasicData.PrTypes.Where(p => p.TypeCode == product.TypeId).FirstOrDefault();
-            Type = t.Name;
-            Status s = ((App)Application.Current).BasicData.Statuses.Where(p => p.StatusCode == product.StatusId).FirstOrDefault();
-            Status = s.Name;
-            Desc = product.Description;
-            Store = product.Store;
-
+            await Application.Current.MainPage.DisplayAlert("Something Went Wrong", "nah", "ok");
         }
-        #endregion
-
-
-        public ICommand CartCommand { get; }
-        public ICommand WishlistCommand { get; }
-
-        private async void OnCart()
+        else
         {
-
             //If the add succeed, display a message
             string Msg = "added product to cart!";
             await Application.Current.MainPage.DisplayAlert("cart", Msg, "ok");
         }
 
-        private async void OnWishlist()
+    }
+
+    private async void OnWishlist()
+    {
+        InServerCall = true;
+
+        User? u = ((App)Application.Current).LoggedInUser;
+
+        bool worked = await this.proxy.AddProToWishAsync(product);
+        InServerCall = false;
+
+        if (!worked)
+        {
+            await Application.Current.MainPage.DisplayAlert("Something Went Wrong", "nah", "ok");
+        }
+        else
         {
             //If the add succeed, display a message
             string Msg = "added product to wishlist!";
             await Application.Current.MainPage.DisplayAlert("wishlist", Msg, "ok");
         }
     }
+}
 

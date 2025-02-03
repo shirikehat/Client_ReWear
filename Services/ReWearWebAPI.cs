@@ -2,6 +2,7 @@ using System.Text;
 using System.Text.Json;
 using Client_ReWear.Models;
 
+
 namespace Client_ReWear.Services;
 
 public class ReWearWebAPI
@@ -406,14 +407,17 @@ public class ReWearWebAPI
         }
     }
 
-    public async Task<PrType> GetType(int typeId)
+   
+    public async Task<bool> AddProToCartAsync(Product product)
     {
-        //Set URI to the specific function API
-        string url = $"{this.baseUrl}GetType?typeId={typeId}";
+        string url = $"{this.baseUrl}AddToCart";
         try
         {
-            HttpResponseMessage response = await client.GetAsync(url);
-            //Check status
+            //do a json to info
+            string json = JsonSerializer.Serialize<Product>(product);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync(url, content);
+            //check if fine
             if (response.IsSuccessStatusCode)
             {
                 //Extract the content as string
@@ -423,28 +427,33 @@ public class ReWearWebAPI
                 {
                     PropertyNameCaseInsensitive = true
                 };
-                PrType result = JsonSerializer.Deserialize<PrType>(resContent, options);
-                return result;
+                Product result = JsonSerializer.Deserialize<Product>(resContent, options);
+                return true;
             }
+
             else
             {
-                return null;
+                return false;
             }
+
         }
         catch (Exception ex)
         {
-            return null;
+            return false;
         }
     }
 
-    public async Task<Status> GetStatus(int statusId)
+
+    public async Task<bool> AddProToWishAsync(Product product)
     {
-        //Set URI to the specific function API
-        string url = $"{this.baseUrl}GetStatus?statusId={statusId}";
+        string url = $"{this.baseUrl}AddToWishist";
         try
         {
-            HttpResponseMessage response = await client.GetAsync(url);
-            //Check status
+            //do a json to info
+            string json = JsonSerializer.Serialize<Product>(product);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync(url, content);
+            //check if fine
             if (response.IsSuccessStatusCode)
             {
                 //Extract the content as string
@@ -454,17 +463,19 @@ public class ReWearWebAPI
                 {
                     PropertyNameCaseInsensitive = true
                 };
-                Status result = JsonSerializer.Deserialize<Status>(resContent, options);
-                return result;
+                Product result = JsonSerializer.Deserialize<Product>(resContent, options);
+                return true;
             }
+
             else
             {
-                return null;
+                return false;
             }
+
         }
         catch (Exception ex)
         {
-            return null;
+            return false;
         }
     }
 
