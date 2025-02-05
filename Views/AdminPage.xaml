@@ -1,15 +1,53 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Client_ReWear.Models"
              xmlns:viewmodel="clr-namespace:Client_ReWear.ViewModels"
              x:Class="Client_ReWear.Views.AdminPage"
              Title="AdminPage"
              x:DataType="viewmodel:AdminPageViewModel">
+
+    <CollectionView
+    ItemsLayout="VerticalGrid, 1"
     
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    ItemsSource="{Binding Users}"
+    SelectedItem="{Binding SelectedUser}"
+    SelectionMode="Single"
+    
+    >
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:User">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Frame
+    
+    Grid.Column="0"
+    Margin="5"
+    BorderColor="Black"
+    CornerRadius="60"
+    HeightRequest="100"
+    HorizontalOptions="Start"
+    WidthRequest="100">
+                        <Image Source="{Binding FullProfileImageUrl}" WidthRequest="100" />
+                    </Frame>
+                    <Label
+    Grid.Column="1"
+    FontFamily="SA"
+    FontSize="45"
+    HorizontalOptions="Start"
+    Text="{Binding UserName}" />
+
+
+                </Grid>
+
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+
 </ContentPage>
