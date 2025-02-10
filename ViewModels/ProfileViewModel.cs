@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 namespace Client_ReWear.ViewModels;
 
+[QueryProperty("TheUser", "selectedUser")]
 public class ProfileViewModel : ViewModelBase
 {
     private ReWearWebAPI proxy;
@@ -16,16 +17,21 @@ public class ProfileViewModel : ViewModelBase
         this.serviceProvider = serviceProvider;
         this.proxy = proxy;
         Products = new ObservableCollection<Product>();
-        User u = ((App)Application.Current).LoggedInUser;
-        Name = u.UserName;
-        PhotoURL = u.FullProfileImageUrl;
-        LocalPhotoPath = "";
-        InServerCall = false;
-        ReadDataFromServer();
+        
         EditCommand = new Command(OnEdit);
     }
 
-
+    private User theUser;
+    public User TheUser
+    {
+        get => theUser;
+        set
+        {
+            theUser = value;
+            ReadDataFromServer();
+            OnPropertyChanged("TheUser");
+        }
+    }
     #region collection view of products
     private ObservableCollection<Product> products;
     public ObservableCollection<Product> Products
@@ -40,7 +46,13 @@ public class ProfileViewModel : ViewModelBase
 
     private async void ReadDataFromServer()
     {
-        List<Product>? products = await proxy.GetProducts();
+        User u = TheUser;
+        Name = u.UserName;
+        PhotoURL = u.FullProfileImageUrl;
+        LocalPhotoPath = "";
+        InServerCall = false;
+        
+        List<Product>? products = await proxy.GetProducts(TheUser);
         
         if (products != null)
         {

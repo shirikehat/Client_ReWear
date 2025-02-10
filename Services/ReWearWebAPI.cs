@@ -2,6 +2,8 @@ using System.Text;
 using System.Text.Json;
 using Client_ReWear.Models;
 
+using User = Client_ReWear.Models.User;
+
 
 namespace Client_ReWear.Services;
 
@@ -275,14 +277,17 @@ public class ReWearWebAPI
     }
 
 
-    public async Task<List<Product>?> GetProducts()
+    public async Task<List<Product>?> GetProducts(Models.User theUser)
     {
         //Set URI to the specific function API
         string url = $"{this.baseUrl}GetProducts";
         try
         {
             //Call the server API
-            HttpResponseMessage response = await client.GetAsync(url);
+            string json = JsonSerializer.Serialize(theUser);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            //Call the server API
+            HttpResponseMessage response = await client.PostAsync(url, content);
             //Check status
             if (response.IsSuccessStatusCode)
             {

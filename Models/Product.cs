@@ -39,9 +39,19 @@ namespace Client_ReWear.Models
                 return ReWearWebAPI.ImageBaseAddress + UserProfile;
             }
         }
-        public Product() 
+        public Product() { }
+       
+      public Product(Models.Product product)
         {
-            
+            this.ProductCode = product.ProductCode;
+            this.Price = product.Price;
+            this.UserId = product.UserId;
+            this.UserName = product.UserName;
+            this.UserProfile = product.UserProfile;
+            this.Size = product.Size;
+            this.StatusId = product.StatusId;
+            this.Store = product.Store;
+            this.Description = product.Description;
         }
     }
 }

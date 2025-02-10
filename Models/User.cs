@@ -23,4 +23,15 @@ public class User
         }
     }
     public User() { }
+
+    public User(Models.User user)
+    {
+        this.Id = user.Id;
+        this.UserName = user.UserName;
+        this.Password = user.Password;
+        this.Phone = user.Phone;
+        this.Email = user.Email;
+        this.IsManager = user.IsManager;
+
+    }
 }

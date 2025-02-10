@@ -87,7 +87,7 @@ public class AdminPageViewModel : ViewModelBase
 
         if (users != null)
         {
-            Users.Clear();
+            Users = new ObservableCollection<User>();
             foreach (User u in users)
             {
                 Users.Add(u);
@@ -125,7 +125,7 @@ public class AdminPageViewModel : ViewModelBase
                 {
                     {"selectedUser",u }
                 };
-            await Shell.Current.GoToAsync("ProfileView", navParam);
+            await Shell.Current.GoToAsync("//Profile", navParam);
 
             SelectedUser = null;
 
