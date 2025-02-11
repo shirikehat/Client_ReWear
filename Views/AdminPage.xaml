@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:Client_ReWear.Models"
-             xmlns:viewmodel="clr-namespace:Client_ReWear.ViewModels"
-             x:Class="Client_ReWear.Views.AdminPage"
-             Title="AdminPage"
-             x:DataType="viewmodel:AdminPageViewModel">
+<ContentPage
+    x:Class="Client_ReWear.Views.AdminPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:Client_ReWear.Models"
+    xmlns:viewmodel="clr-namespace:Client_ReWear.ViewModels"
+    Title="AdminPage"
+    x:DataType="viewmodel:AdminPageViewModel">
 
     <CollectionView
-    ItemsLayout="VerticalGrid, 1"
-    
-    ItemsSource="{Binding Users}"
-    SelectedItem="{Binding SelectedUser}"
-    SelectionMode="Single"
-    
-    >
+        ItemsLayout="VerticalGrid, 1"
+        ItemsSource="{Binding Users}"
+        SelectedItem="{Binding SelectedUser}"
+        SelectionMode="Single">
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="models:User">
                 <Grid>
@@ -26,22 +24,21 @@
                     </Grid.ColumnDefinitions>
 
                     <Frame
-    
-    Grid.Column="0"
-    Margin="5"
-    BorderColor="Black"
-    CornerRadius="60"
-    HeightRequest="100"
-    HorizontalOptions="Start"
-    WidthRequest="100">
+                        Grid.Column="0"
+                        Margin="5"
+                        BorderColor="Black"
+                        CornerRadius="70"
+                        HeightRequest="70"
+                        HorizontalOptions="Start"
+                        WidthRequest="70">
                         <Image Source="{Binding FullProfileImageUrl}" WidthRequest="100" />
                     </Frame>
                     <Label
-    Grid.Column="1"
-    FontFamily="SA"
-    FontSize="45"
-    HorizontalOptions="Start"
-    Text="{Binding UserName}" />
+                        Grid.Column="1"
+                        FontFamily="SA"
+                        FontSize="30"
+                        HorizontalOptions="Start"
+                        Text="{Binding UserName}" />
 
 
                 </Grid>

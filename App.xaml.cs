@@ -20,7 +20,7 @@ namespace Client_ReWear
         {
             this.proxy = proxy;
             InitializeComponent();
-
+            LoadBasicData();
             LoggedInUser = null;
             //MainPage = new AppShell();
             MainPage = new NavigationPage( serviceProvider.GetService<Login>());

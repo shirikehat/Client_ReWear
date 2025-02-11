@@ -12,4 +12,6 @@ public partial class Profile : ContentPage
         this.BindingContext = vm;
         InitializeComponent();
 	}
+
+    
 }

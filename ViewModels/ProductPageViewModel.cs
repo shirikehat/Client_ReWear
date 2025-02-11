@@ -180,7 +180,7 @@ public class ProductPageViewModel : ViewModelBase
                 {
                     {"selectedUser",p }
                 };
-            await Shell.Current.GoToAsync("ProfileView", navParam);
+            await Shell.Current.GoToAsync("Profile", navParam);
             //SelectedPost = null;
 
         }

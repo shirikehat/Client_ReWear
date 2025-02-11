@@ -6,6 +6,7 @@ using System.Windows.Input;
 namespace Client_ReWear.ViewModels;
 
 [QueryProperty("TheUser", "selectedUser")]
+[QueryProperty("PassedFromAdminPage", "passedFromAdminPage")]
 public class ProfileViewModel : ViewModelBase
 {
     private ReWearWebAPI proxy;
@@ -17,8 +18,9 @@ public class ProfileViewModel : ViewModelBase
         this.serviceProvider = serviceProvider;
         this.proxy = proxy;
         Products = new ObservableCollection<Product>();
-        
+        passedFromAdminPage = false;
         EditCommand = new Command(OnEdit);
+        
     }
 
     private User theUser;
@@ -32,6 +34,18 @@ public class ProfileViewModel : ViewModelBase
             OnPropertyChanged("TheUser");
         }
     }
+
+    private bool passedFromAdminPage;
+    public bool PassedFromAdminPage
+    {
+        get => passedFromAdminPage;
+        set
+        {
+            passedFromAdminPage = value;
+            OnPropertyChanged();
+        }
+    }
+
     #region collection view of products
     private ObservableCollection<Product> products;
     public ObservableCollection<Product> Products

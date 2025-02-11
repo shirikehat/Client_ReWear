@@ -123,7 +123,7 @@ public class AdminPageViewModel : ViewModelBase
         {
             var navParam = new Dictionary<string, object>
                 {
-                    {"selectedUser",u }
+                    {"selectedUser",u }, {"passedFromAdminPage", true}
                 };
             await Shell.Current.GoToAsync("//Profile", navParam);
 
