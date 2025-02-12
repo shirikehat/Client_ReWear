@@ -451,7 +451,7 @@ public class ReWearWebAPI
 
     public async Task<bool> AddProToWishAsync(int productID)
     {
-        string url = $"{this.baseUrl}AddToWishist";
+        string url = $"{this.baseUrl}AddToWishlist";
         try
         {
             //do a json to info
