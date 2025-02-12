@@ -205,7 +205,7 @@ public class ProductPageViewModel : ViewModelBase
 
         ProductURL = product.FullImagePath;
         Username = product.UserName;
-        //PhotoURL = product.FullImagePathUser;
+        PhotoURL = product.FullImagePathUser;
         Size = product.Size;
         Price = product.Price;
         PrType t = ((App)Application.Current).BasicData.PrTypes.Where(p => p.TypeCode == product.TypeId).FirstOrDefault();

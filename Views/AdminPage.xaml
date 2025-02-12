@@ -8,22 +8,31 @@
     Title="AdminPage"
     x:DataType="viewmodel:AdminPageViewModel">
 
-    <CollectionView
+
+    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+        <Label
+        FontSize="50"
+        HorizontalOptions="Center"
+        Text="admin page"
+        TextColor="LightPink"
+        FontFamily="Klhamer"/>
+
+        <CollectionView
         ItemsLayout="VerticalGrid, 1"
         ItemsSource="{Binding Users}"
         SelectedItem="{Binding SelectedUser}"
         SelectionMode="Single">
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="models:User">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:User">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                    <Frame
+                        <Frame
                         Grid.Column="0"
                         Margin="5"
                         BorderColor="Black"
@@ -31,9 +40,9 @@
                         HeightRequest="70"
                         HorizontalOptions="Start"
                         WidthRequest="70">
-                        <Image Source="{Binding FullProfileImageUrl}" WidthRequest="100" />
-                    </Frame>
-                    <Label
+                            <Image Source="{Binding FullProfileImageUrl}" WidthRequest="100" />
+                        </Frame>
+                        <Label
                         Grid.Column="1"
                         FontFamily="SA"
                         FontSize="30"
@@ -41,10 +50,13 @@
                         Text="{Binding UserName}" />
 
 
-                </Grid>
+                    </Grid>
 
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+    </VerticalStackLayout>
+
 
 </ContentPage>
