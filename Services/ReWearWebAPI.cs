@@ -253,7 +253,7 @@ public class ReWearWebAPI
     public async Task<bool> UpdateUser(User user)
     {
         //Set URI to the specific function API
-        string url = $"{this.baseUrl}updateuser";
+        string url = $"{this.baseUrl}update";
         try
         {
             //Call the server API
@@ -413,13 +413,13 @@ public class ReWearWebAPI
     }
 
    
-    public async Task<bool> AddProToCartAsync(Product product)
+    public async Task<bool> AddProToCartAsync(int productID)
     {
         string url = $"{this.baseUrl}AddToCart";
         try
         {
             //do a json to info
-            string json = JsonSerializer.Serialize<Product>(product);
+            string json = JsonSerializer.Serialize(productID);
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PostAsync(url, content);
             //check if fine
@@ -449,13 +449,13 @@ public class ReWearWebAPI
     }
 
 
-    public async Task<bool> AddProToWishAsync(Product product)
+    public async Task<bool> AddProToWishAsync(int productID)
     {
         string url = $"{this.baseUrl}AddToWishist";
         try
         {
             //do a json to info
-            string json = JsonSerializer.Serialize<Product>(product);
+            string json = JsonSerializer.Serialize(productID);
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PostAsync(url, content);
             //check if fine

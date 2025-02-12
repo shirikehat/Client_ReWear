@@ -1,5 +1,6 @@
 ﻿using Client_ReWear.Models;
 using Client_ReWear.Services;
+using Client_ReWear.Views;
 using System.Collections.ObjectModel;
 
 
@@ -406,6 +407,11 @@ namespace Client_ReWear.ViewModels
                     }
                     InServerCall = false;
                     await Shell.Current.DisplayAlert("Save Profile", "Profile saved successfully", "ok");
+                    ((App)Application.Current).LoggedInUser.UserName = Name;
+                    ((App)Application.Current).LoggedInUser.Password = Password;
+                    ((App)Application.Current).LoggedInUser.Email = Email;
+                    ((App)Application.Current).LoggedInUser.Phone = Phone;
+                    ((App)Application.Current).MainPage.Navigation.PushAsync(serviceProvider.GetService<Login>());
                 }
                 else
                 {
