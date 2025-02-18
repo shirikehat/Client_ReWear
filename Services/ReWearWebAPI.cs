@@ -415,7 +415,7 @@ public class ReWearWebAPI
    
     public async Task<bool> AddProToCartAsync(int productID)
     {
-        string url = $"{this.baseUrl}AddToCart";
+        string url = $"{this.baseUrl}AddToCart?ProductCode={productID}";
         try
         {
             //do a json to info
@@ -451,7 +451,7 @@ public class ReWearWebAPI
 
     public async Task<bool> AddProToWishAsync(int productID)
     {
-        string url = $"{this.baseUrl}AddToWishlist";
+        string url = $"{this.baseUrl}AddToWishlist?ProductCode={productID}";
         try
         {
             //do a json to info
@@ -519,4 +519,70 @@ public class ReWearWebAPI
         }
     }
 
+
+
+
+    public async Task<Cart> GetCart(User u)
+    {
+        //Set URI to the specific function API
+        string url = $"{this.baseUrl}GetCart?theUser={u}";
+        try
+        {
+            HttpResponseMessage response = await client.GetAsync(url);
+            //Check status
+            if (response.IsSuccessStatusCode)
+            {
+                //Extract the content as string
+                string resContent = await response.Content.ReadAsStringAsync();
+                //Desrialize result
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                Cart result = JsonSerializer.Deserialize<Cart>(resContent, options);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
+
+
+
+    public async Task<Wishlist> GetWishlist(User u)
+    {
+        //Set URI to the specific function API
+        string url = $"{this.baseUrl}GetWishlist?theUser={u}";
+        try
+        {
+            HttpResponseMessage response = await client.GetAsync(url);
+            //Check status
+            if (response.IsSuccessStatusCode)
+            {
+                //Extract the content as string
+                string resContent = await response.Content.ReadAsStringAsync();
+                //Desrialize result
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                Wishlist result = JsonSerializer.Deserialize<Wishlist>(resContent, options);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
 }
