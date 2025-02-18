@@ -140,7 +140,7 @@ public class ProductPageViewModel : ViewModelBase
         set
         {
             photoURL = value;
-            OnPropertyChanged(nameof(PhotoURL));
+            OnPropertyChanged("PhotoURL");
         }
     }
 
@@ -152,7 +152,7 @@ public class ProductPageViewModel : ViewModelBase
         set
         {
             localPhotoPath = value;
-            OnPropertyChanged(nameof(LocalPhotoPath));
+            OnPropertyChanged("LocalPhotoPath");
         }
     }
     #endregion

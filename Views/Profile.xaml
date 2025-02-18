@@ -27,11 +27,11 @@
                     Grid.Column="0"
                     Margin="5"
                     BorderColor="Black"
-                    CornerRadius="60"
+                    CornerRadius="70"
                     HeightRequest="100"
                     HorizontalOptions="Start"
                     WidthRequest="100">
-                    <Image Source="{Binding PhotoURL}" WidthRequest="100" />
+                    <Image Source="{Binding PhotoURL}" WidthRequest="200" />
                 </Frame>
                 <Label
                     Grid.Column="1"
@@ -41,6 +41,7 @@
                     Text="{Binding Name}" />
                 <Label
                     FontAttributes="Bold"
+                    IsVisible="{Binding TheUser}"
                     FontFamily="SA"
                     FontSize="Medium"
                     HorizontalOptions="Center"

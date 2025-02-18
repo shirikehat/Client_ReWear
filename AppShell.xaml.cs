@@ -15,6 +15,7 @@ namespace Client_ReWear
         {
             Routing.RegisterRoute("ProductView", typeof(ProductPage));
             Routing.RegisterRoute("EditProfileView", typeof(EditProfile));
+            Routing.RegisterRoute("AdminProfile", typeof(Profile));
         }
 
        

@@ -121,11 +121,12 @@ public class AdminPageViewModel : ViewModelBase
     {
         if (u != null)
         {
+            ProfileNavigationState.NavigatedFromTabBar = false;
             var navParam = new Dictionary<string, object>
                 {
-                    {"selectedUser",u }, {"passedFromAdminPage", true}
+                    {"selectedUser",u }
                 };
-            await Shell.Current.GoToAsync("//Profile", navParam);
+            await Shell.Current.GoToAsync("AdminProfile", navParam);
 
             SelectedUser = null;
 
