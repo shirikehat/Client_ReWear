@@ -9,19 +9,19 @@
     x:DataType="viewmodel:AdminPageViewModel">
 
 
-    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+    <VerticalStackLayout>
         <Label
-        FontSize="50"
-        HorizontalOptions="Center"
-        Text="admin page"
-        TextColor="LightPink"
-        FontFamily="Klhamer"/>
+            FontFamily="Klhamer"
+            FontSize="50"
+            HorizontalOptions="Center"
+            Text="admin page"
+            TextColor="LightPink" />
 
         <CollectionView
-        ItemsLayout="VerticalGrid, 1"
-        ItemsSource="{Binding Users}"
-        SelectedItem="{Binding SelectedUser}"
-        SelectionMode="Single">
+            ItemsLayout="VerticalGrid, 1"
+            ItemsSource="{Binding Users}"
+            SelectedItem="{Binding SelectedUser}"
+            SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:User">
                     <Grid>
@@ -33,21 +33,21 @@
                         </Grid.ColumnDefinitions>
 
                         <Frame
-                        Grid.Column="0"
-                        Margin="5"
-                        BorderColor="Black"
-                        CornerRadius="70"
-                        HeightRequest="70"
-                        HorizontalOptions="Start"
-                        WidthRequest="70">
+                            Grid.Column="0"
+                            Margin="5"
+                            BorderColor="Black"
+                            CornerRadius="70"
+                            HeightRequest="70"
+                            HorizontalOptions="Start"
+                            WidthRequest="70">
                             <Image Source="{Binding FullProfileImageUrl}" WidthRequest="100" />
                         </Frame>
                         <Label
-                        Grid.Column="1"
-                        FontFamily="SA"
-                        FontSize="30"
-                        HorizontalOptions="Start"
-                        Text="{Binding UserName}" />
+                            Grid.Column="1"
+                            FontFamily="SA"
+                            FontSize="30"
+                            HorizontalOptions="Start"
+                            Text="{Binding UserName}" />
 
 
                     </Grid>
@@ -55,7 +55,7 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        
+
     </VerticalStackLayout>
 
 

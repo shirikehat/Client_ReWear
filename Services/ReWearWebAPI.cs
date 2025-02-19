@@ -522,13 +522,16 @@ public class ReWearWebAPI
 
 
 
-    public async Task<Cart> GetCart(User u)
+    public async Task<List<Cart>> GetCart(User u)
     {
         //Set URI to the specific function API
         string url = $"{this.baseUrl}GetCart?theUser={u}";
         try
         {
-            HttpResponseMessage response = await client.GetAsync(url);
+            //do a json to info
+            string json = JsonSerializer.Serialize(u);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync(url, content);
             //Check status
             if (response.IsSuccessStatusCode)
             {
@@ -539,7 +542,7 @@ public class ReWearWebAPI
                 {
                     PropertyNameCaseInsensitive = true
                 };
-                Cart result = JsonSerializer.Deserialize<Cart>(resContent, options);
+                List<Cart> result = JsonSerializer.Deserialize<List<Cart>>(resContent, options);
                 return result;
             }
             else
@@ -554,14 +557,16 @@ public class ReWearWebAPI
     }
 
 
-
-    public async Task<Wishlist> GetWishlist(User u)
+    public async Task<List<Wishlist>> GetWishlist(User u)
     {
         //Set URI to the specific function API
         string url = $"{this.baseUrl}GetWishlist?theUser={u}";
         try
         {
-            HttpResponseMessage response = await client.GetAsync(url);
+            //do a json to info
+            string json = JsonSerializer.Serialize(u);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync(url, content);
             //Check status
             if (response.IsSuccessStatusCode)
             {
@@ -572,7 +577,7 @@ public class ReWearWebAPI
                 {
                     PropertyNameCaseInsensitive = true
                 };
-                Wishlist result = JsonSerializer.Deserialize<Wishlist>(resContent, options);
+                List<Wishlist> result = JsonSerializer.Deserialize<List<Wishlist>>(resContent, options);
                 return result;
             }
             else
