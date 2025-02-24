@@ -415,7 +415,7 @@ public class ReWearWebAPI
    
     public async Task<bool> AddProToCartAsync(int productID)
     {
-        string url = $"{this.baseUrl}AddToCart?ProductCode={productID}";
+        string url = $"{this.baseUrl}AddToCart";
         try
         {
             //do a json to info
@@ -451,7 +451,7 @@ public class ReWearWebAPI
 
     public async Task<bool> AddProToWishAsync(int productID)
     {
-        string url = $"{this.baseUrl}AddToWishlist?ProductCode={productID}";
+        string url = $"{this.baseUrl}AddToWishlist";
         try
         {
             //do a json to info
@@ -522,16 +522,14 @@ public class ReWearWebAPI
 
 
 
-    public async Task<List<Cart>> GetCart(User u)
+    public async Task<List<Cart>> GetCart()
     {
         //Set URI to the specific function API
-        string url = $"{this.baseUrl}GetCart?theUser={u}";
+        string url = $"{this.baseUrl}GetCart";
         try
         {
-            //do a json to info
-            string json = JsonSerializer.Serialize(u);
-            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync(url, content);
+            //Call the server API
+            HttpResponseMessage response = await client.GetAsync(url);
             //Check status
             if (response.IsSuccessStatusCode)
             {
@@ -557,16 +555,14 @@ public class ReWearWebAPI
     }
 
 
-    public async Task<List<Wishlist>> GetWishlist(User u)
+    public async Task<List<Wishlist>> GetWishlist()
     {
         //Set URI to the specific function API
-        string url = $"{this.baseUrl}GetWishlist?theUser={u}";
+        string url = $"{this.baseUrl}GetWishlist";
         try
         {
-            //do a json to info
-            string json = JsonSerializer.Serialize(u);
-            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync(url, content);
+            //Call the server API
+            HttpResponseMessage response = await client.GetAsync(url);
             //Check status
             if (response.IsSuccessStatusCode)
             {

@@ -1,6 +1,7 @@
 using Client_ReWear.Models;
 using Client_ReWear.Services;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Client_ReWear.ViewModels;
 
@@ -55,10 +56,10 @@ public class CartViewModel : ViewModelBase
 
     private async void ReadDataFromServer()
     {
-        
+
         InServerCall = false;
 
-        List<Cart>? carts = await proxy.GetCart(User);
+        List<Cart>? carts = await proxy.GetCart();
 
         if (carts != null)
         {
@@ -109,5 +110,34 @@ public class CartViewModel : ViewModelBase
     }
 
     #endregion
+
+
+
+    private bool isRefreshing;
+    public bool IsRefreshing
+    {
+        get => isRefreshing;
+        set
+        {
+            if (isRefreshing != value)
+            {
+                isRefreshing = value;
+                OnPropertyChanged(nameof(IsRefreshing));
+            }
+        }
+    }
+
+    //RefreshView refreshView = new RefreshView();
+    //ICommand refreshCommand = new Command(() =>
+    //{
+    //    // IsRefreshing is true
+    //    ReadDataFromServer();
+    //    // Refresh data here
+    //    refreshView.IsRefreshing = false;
+    //});
+
+    //refreshView.Command = refreshCommand;
+    //    refreshView.Content = scrollView;
+
 
 }

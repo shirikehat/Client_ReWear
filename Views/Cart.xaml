@@ -8,7 +8,9 @@
     Title="Cart"
     x:DataType="viewmodel:CartViewModel">
 
-    <VerticalStackLayout>
+
+    
+        <VerticalStackLayout>
         <Label
             FontFamily="Klhamer"
             FontSize="50"
@@ -22,7 +24,7 @@
             SelectedItem="{Binding SelectedCart}"
             SelectionMode="Single">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Cart">
+                <DataTemplate x:DataType="models:Product">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -36,7 +38,7 @@
                             Margin="5"
                             Aspect="AspectFill"
                             HeightRequest="130"
-                            Source="{Binding ProductCodeNavigation.FullImagePath}"
+                            Source="{Binding FullImagePath}"
                             WidthRequest="130" />
 
                         <Label
@@ -44,14 +46,14 @@
                             FontFamily="SA"
                             FontSize="30"
                             HorizontalOptions="Start"
-                            Text="{Binding ProductCodeNavigation.UserName}" />
+                            Text="{Binding UserName}" />
 
                         <Label
                             Grid.Column="2"
                             FontFamily="SA"
                             FontSize="30"
                             HorizontalOptions="Start"
-                            Text="{Binding ProductCodeNavigation.Price}" />
+                            Text="{Binding Price}" />
                     </Grid>
 
                 </DataTemplate>
@@ -59,4 +61,5 @@
         </CollectionView>
 
     </VerticalStackLayout>
+    
 </ContentPage>

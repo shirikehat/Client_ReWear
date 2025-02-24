@@ -24,7 +24,25 @@
             SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:User">
-                    <Grid>
+
+                    <SwipeView Grid.Column="0" Margin="5,0">
+                        <SwipeView.LeftItems>
+                            <SwipeItems>
+                                <SwipeItem
+                                        BackgroundColor="Red"
+                                        Command="{Binding Source={x:Reference Users}, Path=BindingContext.Delete}"
+                                        CommandParameter="{Binding .}"
+                                        IconImageSource="delete.png"
+                                        
+                                        Text="Delete" 
+                                    />
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+
+                       
+
+
+                        <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
@@ -51,6 +69,7 @@
 
 
                     </Grid>
+                    </SwipeView>
 
                 </DataTemplate>
             </CollectionView.ItemTemplate>

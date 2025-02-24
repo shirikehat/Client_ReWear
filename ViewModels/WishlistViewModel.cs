@@ -57,7 +57,7 @@ public class WishlistViewModel : ViewModelBase
 
         InServerCall = false;
 
-        List<Wishlist>? wishlists = await proxy.GetWishlist(User);
+        List<Wishlist>? wishlists = await proxy.GetWishlist();
 
         if (wishlists != null)
         {
