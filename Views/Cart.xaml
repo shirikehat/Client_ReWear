@@ -9,31 +9,32 @@
     x:DataType="viewmodel:CartViewModel">
 
 
-    
+    <RefreshView IsRefreshing="{Binding IsRefreshing}"
+             Command="{Binding RefreshCommand}">
         <VerticalStackLayout>
-        <Label
+            <Label
             FontFamily="Klhamer"
             FontSize="50"
             HorizontalOptions="Center"
             Text="your cart"
             TextColor="LightPink" />
 
-        <CollectionView
+            <CollectionView
             ItemsLayout="VerticalGrid, 1"
             ItemsSource="{Binding Carts}"
             SelectedItem="{Binding SelectedCart}"
             SelectionMode="Single">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Product">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Product">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-                        <Image
+                            <Image
                             Grid.Column="0"
                             Margin="5"
                             Aspect="AspectFill"
@@ -41,25 +42,25 @@
                             Source="{Binding FullImagePath}"
                             WidthRequest="130" />
 
-                        <Label
+                            <Label
                             Grid.Column="1"
                             FontFamily="SA"
                             FontSize="30"
                             HorizontalOptions="Start"
                             Text="{Binding UserName}" />
 
-                        <Label
+                            <Label
                             Grid.Column="2"
                             FontFamily="SA"
                             FontSize="30"
                             HorizontalOptions="Start"
                             Text="{Binding Price}" />
-                    </Grid>
+                        </Grid>
 
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-    </VerticalStackLayout>
-    
+        </VerticalStackLayout>
+    </RefreshView>
 </ContentPage>

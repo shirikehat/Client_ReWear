@@ -17,7 +17,7 @@ public class CartViewModel : ViewModelBase
         this.serviceProvider = serviceProvider;
         this.proxy = proxy;
         Carts = new ObservableCollection<Cart>();
-
+        RefreshCommand = new Command(Refresh);
         User u = ((App)Application.Current).LoggedInUser;
         User = u;
     }
@@ -127,17 +127,13 @@ public class CartViewModel : ViewModelBase
         }
     }
 
-    //RefreshView refreshView = new RefreshView();
-    //ICommand refreshCommand = new Command(() =>
-    //{
-    //    // IsRefreshing is true
-    //    ReadDataFromServer();
-    //    // Refresh data here
-    //    refreshView.IsRefreshing = false;
-    //});
+    public ICommand RefreshCommand { get; }
+    public void Refresh()
+    {
+        this.user = ((App)Application.Current).LoggedInUser;
+        ReadDataFromServer();
 
-    //refreshView.Command = refreshCommand;
-    //    refreshView.Content = scrollView;
+    }
 
 
 }
