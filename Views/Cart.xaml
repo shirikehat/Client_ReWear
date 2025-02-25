@@ -19,13 +19,27 @@
             Text="your cart"
             TextColor="LightPink" />
 
+            <!--<Label
+        FontAttributes="Bold"
+    FontSize="Medium"
+       
+    HorizontalOptions="Center"
+        Text="to youre orders"
+    FontFamily="SA"
+        TextColor="Blue"
+        >
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OrdersCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>-->
+
             <CollectionView
             ItemsLayout="VerticalGrid, 1"
             ItemsSource="{Binding Carts}"
             SelectedItem="{Binding SelectedCart}"
             SelectionMode="Single">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Product">
+                    <DataTemplate x:DataType="models:Cart">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -39,7 +53,7 @@
                             Margin="5"
                             Aspect="AspectFill"
                             HeightRequest="130"
-                            Source="{Binding FullImagePath}"
+                            Source="{Binding ProductCodeNavigation.FullImagePath}"
                             WidthRequest="130" />
 
                             <Label
@@ -47,14 +61,16 @@
                             FontFamily="SA"
                             FontSize="30"
                             HorizontalOptions="Start"
-                            Text="{Binding UserName}" />
+                            Text="{Binding ProductCodeNavigation.UserName}" />
 
                             <Label
                             Grid.Column="2"
                             FontFamily="SA"
                             FontSize="30"
                             HorizontalOptions="Start"
-                            Text="{Binding Price}" />
+                            Text="{Binding ProductCodeNavigation.Price}" />
+
+
                         </Grid>
 
                     </DataTemplate>

@@ -30,11 +30,11 @@
                             <SwipeItems>
                                 <SwipeItem
                                         BackgroundColor="Red"
-                                        Command="{Binding Source={x:Reference Users}, Path=BindingContext.Delete}"
+                                        Command="{Binding Source={x:Reference Users}, Path=BindingContext.Block}"
                                         CommandParameter="{Binding .}"
-                                        IconImageSource="delete.png"
+                                        IconImageSource="blocked.png"
                                         
-                                        Text="Delete" 
+                                        Text="Block" 
                                     />
                             </SwipeItems>
                         </SwipeView.LeftItems>

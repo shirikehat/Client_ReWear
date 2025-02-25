@@ -230,10 +230,10 @@ public class ProductPageViewModel : ViewModelBase
 
         User? u = ((App)Application.Current).LoggedInUser;
         
-        bool worked= await this.proxy.AddProToCartAsync(product.ProductCode);
+        Cart worked= await this.proxy.AddProToCartAsync(product.ProductCode);
         InServerCall = false;
 
-        if (!worked)
+        if (worked == null)
         {
             await Application.Current.MainPage.DisplayAlert("Something Went Wrong", "couldn't add product to cart", "ok");
         }
@@ -252,10 +252,10 @@ public class ProductPageViewModel : ViewModelBase
 
         User? u = ((App)Application.Current).LoggedInUser;
 
-        bool worked = await this.proxy.AddProToWishAsync(product.ProductCode);
+        Wishlist worked = await this.proxy.AddProToWishAsync(product.ProductCode);
         InServerCall = false;
 
-        if (!worked)
+        if (worked == null)
         {
             await Application.Current.MainPage.DisplayAlert("Something Went Wrong", "couldn't add product to wishlist", "ok");
         }

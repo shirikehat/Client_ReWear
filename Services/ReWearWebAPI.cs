@@ -413,7 +413,7 @@ public class ReWearWebAPI
     }
 
    
-    public async Task<bool> AddProToCartAsync(int productID)
+    public async Task<Cart> AddProToCartAsync(int productID)
     {
         string url = $"{this.baseUrl}AddToCart";
         try
@@ -432,24 +432,24 @@ public class ReWearWebAPI
                 {
                     PropertyNameCaseInsensitive = true
                 };
-                Product result = JsonSerializer.Deserialize<Product>(resContent, options);
-                return true;
+                Cart result = JsonSerializer.Deserialize<Cart>(resContent, options);
+                return result;
             }
 
             else
             {
-                return false;
+                return null;
             }
 
         }
         catch (Exception ex)
         {
-            return false;
+            return null;
         }
     }
 
 
-    public async Task<bool> AddProToWishAsync(int productID)
+    public async Task<Wishlist> AddProToWishAsync(int productID)
     {
         string url = $"{this.baseUrl}AddToWishlist";
         try
@@ -468,19 +468,19 @@ public class ReWearWebAPI
                 {
                     PropertyNameCaseInsensitive = true
                 };
-                Product result = JsonSerializer.Deserialize<Product>(resContent, options);
-                return true;
+                Wishlist result = JsonSerializer.Deserialize<Wishlist>(resContent, options);
+                return result;
             }
 
             else
             {
-                return false;
+                return null;
             }
 
         }
         catch (Exception ex)
         {
-            return false;
+            return null;
         }
     }
 
@@ -586,4 +586,36 @@ public class ReWearWebAPI
             return null;
         }
     }
+
+
+
+    public async Task<bool> Block(User user)
+    {
+        //Set URI to the specific function API
+        string url = $"{this.baseUrl}Block";
+        try
+        {
+            //Call the server API
+            string json = JsonSerializer.Serialize(user);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync(url, content);
+            //Check status
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
+
+    
+
 }

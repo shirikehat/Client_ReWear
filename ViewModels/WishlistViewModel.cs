@@ -1,6 +1,7 @@
 using Client_ReWear.Models;
 using Client_ReWear.Services;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 namespace Client_ReWear.ViewModels;
 
 public class WishlistViewModel : ViewModelBase
@@ -15,9 +16,11 @@ public class WishlistViewModel : ViewModelBase
         this.serviceProvider = serviceProvider;
         this.proxy = proxy;
         Wishlists = new ObservableCollection<Wishlist>();
-
+        RefreshCommand = new Command(Refresh);
         User u = ((App)Application.Current).LoggedInUser;
         User = u;
+        IsRefreshing = true;
+        ReadDataFromServer();
     }
 
     #region User
@@ -30,7 +33,7 @@ public class WishlistViewModel : ViewModelBase
             if (user != value)
             {
                 user = value;
-                ReadDataFromServer();
+               
                 OnPropertyChanged(nameof(User));
             }
         }
@@ -55,7 +58,7 @@ public class WishlistViewModel : ViewModelBase
     private async void ReadDataFromServer()
     {
 
-        InServerCall = false;
+        
 
         List<Wishlist>? wishlists = await proxy.GetWishlist();
 
@@ -67,7 +70,7 @@ public class WishlistViewModel : ViewModelBase
                 Wishlists.Add(w);
             }
         }
-
+        IsRefreshing = false;
     }
     #endregion
 
@@ -108,5 +111,27 @@ public class WishlistViewModel : ViewModelBase
     }
 
     #endregion
+
+    private bool isRefreshing;
+    public bool IsRefreshing
+    {
+        get => isRefreshing;
+        set
+        {
+            if (isRefreshing != value)
+            {
+                isRefreshing = value;
+                OnPropertyChanged(nameof(IsRefreshing));
+            }
+        }
+    }
+
+    public ICommand RefreshCommand { get; }
+    public void Refresh()
+    {
+        ReadDataFromServer();
+
+    }
+
 
 }

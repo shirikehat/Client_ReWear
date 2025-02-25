@@ -12,21 +12,21 @@ public class LoginViewModel : ViewModelBase
     public ReWearWebAPI proxy;
     private readonly IServiceProvider serviceProvider;
 
-    
-  
-   
+
+
+
 
 
     public LoginViewModel(ReWearWebAPI service, IServiceProvider serviceProvider)
     {
         this.serviceProvider = serviceProvider;
-            this.proxy = service;
-            LoginCommand = new Command(OnLogin);
-            RegisterCommand = new Command(OnRegister);
-            username = "";
-            password = "";
-            InServerCall = false;
-            errorMsg = "";
+        this.proxy = service;
+        LoginCommand = new Command(OnLogin);
+        RegisterCommand = new Command(OnRegister);
+        username = "";
+        password = "";
+        InServerCall = false;
+        errorMsg = "";
     }
 
     private string username;
@@ -94,6 +94,10 @@ public class LoginViewModel : ViewModelBase
         if (u == null)
         {
             ErrorMsg = "Invalid username or password";
+        }
+        else if (u.IsBlocked == true)
+        {
+            ErrorMsg = "Unfortunately your'e blocked from the app";
         }
         else
         {

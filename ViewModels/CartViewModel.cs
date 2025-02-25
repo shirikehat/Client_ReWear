@@ -18,8 +18,12 @@ public class CartViewModel : ViewModelBase
         this.proxy = proxy;
         Carts = new ObservableCollection<Cart>();
         RefreshCommand = new Command(Refresh);
+        //OrdersCommand = new Command(OnOrders);
         User u = ((App)Application.Current).LoggedInUser;
         User = u;
+        IsRefreshing = true;
+        ReadDataFromServer();
+
     }
 
     #region User
@@ -32,7 +36,6 @@ public class CartViewModel : ViewModelBase
             if (user != value)
             {
                 user = value;
-                ReadDataFromServer();
                 OnPropertyChanged(nameof(User));
             }
         }
@@ -57,8 +60,7 @@ public class CartViewModel : ViewModelBase
     private async void ReadDataFromServer()
     {
 
-        InServerCall = false;
-
+        
         List<Cart>? carts = await proxy.GetCart();
 
         if (carts != null)
@@ -70,6 +72,7 @@ public class CartViewModel : ViewModelBase
             }
         }
 
+        IsRefreshing = false;
     }
     #endregion
 
@@ -130,10 +133,17 @@ public class CartViewModel : ViewModelBase
     public ICommand RefreshCommand { get; }
     public void Refresh()
     {
-        this.user = ((App)Application.Current).LoggedInUser;
         ReadDataFromServer();
 
     }
 
+
+    //public ICommand OrdersCommand { get; }
+    //private void OnOrders()
+    //{
+        
+    //    // Navigate to the Orders View page
+    //    ((App)Application.Current).MainPage.Navigation.PushAsync(serviceProvider.GetService<Orders>());
+    //}
 
 }

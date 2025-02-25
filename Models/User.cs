@@ -13,6 +13,7 @@ public class User
     public string Email { get; set; } = null!;
     public bool IsManager { get; set; }
 
+    public bool IsBlocked { get; set; }
     public string ProfileImagePath { get; set; } = "";
 
     public string FullProfileImageUrl 

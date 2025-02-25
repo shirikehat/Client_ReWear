@@ -7,7 +7,10 @@
     xmlns:viewmodel="clr-namespace:Client_ReWear.ViewModels"
     Title="Wishlist"
     x:DataType="viewmodel:WishlistViewModel">
-    <VerticalStackLayout>
+
+    <RefreshView IsRefreshing="{Binding IsRefreshing}"
+         Command="{Binding RefreshCommand}">
+        <VerticalStackLayout>
         <Label
             FontFamily="Klhamer"
             FontSize="50"
@@ -57,5 +60,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
+           
     </VerticalStackLayout>
+    </RefreshView>
 </ContentPage>

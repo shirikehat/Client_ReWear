@@ -21,7 +21,9 @@ public class AdminPageViewModel : ViewModelBase
         LocalPhotoPath = "";
         InServerCall = false;
         ReadDataFromServer();
-        Delete = new Command(OnDelete);
+        BlockPic = "blocked.png";
+        Block = new Command<User>(OnBlock);
+       
     }
 
 
@@ -135,9 +137,40 @@ public class AdminPageViewModel : ViewModelBase
 
     #endregion
 
-    public ICommand Delete { get; }
-    public void OnDelete()
+
+    #region Block
+    private string blockPic;
+    public string BlockPic
     {
+        get => blockPic;
+        set
+        {
+            blockPic = value;
+            OnPropertyChanged(nameof(BlockPic));
+        }
+    }
+    private int blockCount = 0;
+    public ICommand Block { get; }
+    public async void OnBlock(User u)
+    {
+        blockCount++;
+        // Switch between different images based on the click count
+        if (blockCount % 2 == 0)
+        {
+            u.IsBlocked = false;
+            await proxy.Block(u);
+            BlockPic = "blocked.png"; // First image
+        }
+        else
+        {
+            u.IsBlocked = true;
+            await proxy.Block(u);
+            BlockPic = "unblocked.png"; // Second image
+        }
 
     }
+
+
+   
+    #endregion
 }
