@@ -78,8 +78,8 @@ public class WishlistViewModel : ViewModelBase
     #region Single Selection
 
 
-    private Wishlist selectedWishlist;
-    public Wishlist SelectedWishlist
+    private Product selectedWishlist;
+    public Product SelectedWishlist
     {
         get
         {
@@ -95,7 +95,7 @@ public class WishlistViewModel : ViewModelBase
 
 
 
-    private async void OnSingleSelectWishlist(Wishlist w)
+    private async void OnSingleSelectWishlist(Product w)
     {
         if (w != null)
         {

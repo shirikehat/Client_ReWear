@@ -19,20 +19,20 @@
             Text="your cart"
             TextColor="LightPink" />
 
-            <!--<Label
+            <Label
         FontAttributes="Bold"
     FontSize="Medium"
        
     HorizontalOptions="Center"
-        Text="to youre orders"
+        Text="go to ordered from you"
     FontFamily="SA"
         TextColor="Blue"
         >
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding OrdersCommand}"/>
                 </Label.GestureRecognizers>
-            </Label>-->
-
+            </Label>
+            
             <CollectionView
             ItemsLayout="VerticalGrid, 1"
             ItemsSource="{Binding Carts}"
