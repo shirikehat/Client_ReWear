@@ -9,7 +9,9 @@
     Shell.FlyoutBehavior="Flyout"
     Title="Client_ReWear">
 
+    
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Route="tabs">
+
         <ShellContent
             Title="Home" Icon="home1.png"
             ContentTemplate="{DataTemplate views:Home}"
@@ -22,10 +24,16 @@
             Title="Post" Icon="post1.png"
             ContentTemplate="{DataTemplate views:Post}"
             Route="Post" />
-        <ShellContent 
-            Title="cart" Icon="cart1.png"
-            ContentTemplate="{DataTemplate views:Cart}"
-            Route="Cart"/>
+        
+        
+            <Tab Title="Cart"
+            Icon="cart1.png">
+                <ShellContent Title="Cart"
+                         ContentTemplate="{DataTemplate views:CartView}" />
+                <ShellContent Title="Orders"
+                         ContentTemplate="{DataTemplate views:Orders}" />
+            </Tab>
+        
         <ShellContent
             Title="Profile" Icon="profile1.png"
             ContentTemplate="{DataTemplate views:Profile}"
@@ -37,6 +45,7 @@
 
     </FlyoutItem>
 
+        
     <MenuItem Text="Logout" Command="{Binding LogoutCommand}" IconImageSource="logout.png"/>
 
 

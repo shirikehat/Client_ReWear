@@ -45,7 +45,7 @@ namespace Client_ReWear
             builder.Services.AddTransient<Wishlist>();
             builder.Services.AddTransient<Post>();
             builder.Services.AddTransient<Profile>();
-            builder.Services.AddTransient<Cart>();
+            builder.Services.AddTransient<CartView>();
             builder.Services.AddTransient<Orders>();
             builder.Services.AddTransient<ProductPage>();
             builder.Services.AddTransient<EditProfile>();

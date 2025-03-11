@@ -5,10 +5,17 @@
              x:Class="Client_ReWear.Views.Orders"
              Title="Orders"
              x:DataType="viewmodel:OrdersViewModel">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+
+    <RefreshView IsRefreshing="{Binding IsRefreshing}"
+         Command="{Binding RefreshCommand}">
+        <VerticalStackLayout>
+            <Label
+FontFamily="Klhamer"
+FontSize="50"
+HorizontalOptions="Center"
+Text="ordered from you"
+TextColor="LightPink" />
+        </VerticalStackLayout>
+    </RefreshView>
 </ContentPage>

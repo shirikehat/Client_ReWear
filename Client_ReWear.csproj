@@ -93,10 +93,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\CartView.xaml.cs">
+	    <DependentUpon>CartView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Views\AdminPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Cart.xaml">
+	  <MauiXaml Update="Views\CartView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\EditProfile.xaml">

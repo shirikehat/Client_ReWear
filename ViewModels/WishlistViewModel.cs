@@ -78,8 +78,8 @@ public class WishlistViewModel : ViewModelBase
     #region Single Selection
 
 
-    private Product selectedWishlist;
-    public Product SelectedWishlist
+    private Wishlist selectedWishlist;
+    public Wishlist SelectedWishlist
     {
         get
         {
@@ -88,7 +88,7 @@ public class WishlistViewModel : ViewModelBase
         set
         {
             this.selectedWishlist = value;
-            OnSingleSelectWishlist(selectedWishlist);
+            OnSingleSelectWishlist(selectedWishlist.ProductCodeNavigation);
             OnPropertyChanged();
         }
     }

@@ -19,11 +19,10 @@ public class CartViewModel : ViewModelBase
         this.proxy = proxy;
         Carts = new ObservableCollection<Models.Cart>();
         RefreshCommand = new Command(Refresh);
-        OrdersCommand = new Command(OnOrders);
         User u = ((App)Application.Current).LoggedInUser;
         User = u;
         IsRefreshing = true;
-        IsEmpty = true;
+       
         ReadDataFromServer();
 
     }
@@ -48,8 +47,8 @@ public class CartViewModel : ViewModelBase
 
 
     #region collection view of carts
-    private ObservableCollection<Models.Cart> carts;
-    public ObservableCollection<Models.Cart> Carts
+    private ObservableCollection<Cart> carts;
+    public ObservableCollection<Cart> Carts
     {
         get => carts;
         set
@@ -62,13 +61,13 @@ public class CartViewModel : ViewModelBase
     private async void ReadDataFromServer()
     {
 
-        List<Models.Cart>? carts = await proxy.GetCart();
+        List<Cart>? carts = await proxy.GetCart();
 
         if (carts != null)
         {
-            IsEmpty = false;
+           
             Carts.Clear();
-            foreach (Models.Cart c in carts)
+            foreach (Cart c in carts)
             {
                 Carts.Add(c);
             }
@@ -79,37 +78,12 @@ public class CartViewModel : ViewModelBase
     }
     #endregion
 
-    #region is empty?
-    private string str;
-    public string Str
-    {
-        get => str;
-        set
-        {
-            str = "Cart is empty";
-            OnPropertyChanged("Str");
-        }
-    }
-
-    private bool isEmpty;
-    public bool IsEmpty
-    {
-        get => isEmpty;
-        set
-        {
-            if (isEmpty != value)
-            {
-                isEmpty = value;
-                OnPropertyChanged(nameof(IsEmpty));
-            }
-        }
-    }
-    #endregion
+   
 
     #region Single Selection
 
-    private Product selectedCart;
-    public Product SelectedCart
+    private Cart selectedCart;
+    public Cart SelectedCart
     {
         get
         {
@@ -118,7 +92,7 @@ public class CartViewModel : ViewModelBase
         set
         {
             this.selectedCart = value;
-            OnSingleSelectCart(selectedCart);
+            OnSingleSelectCart(selectedCart.ProductCodeNavigation);
             OnPropertyChanged();
         }
     }
@@ -166,12 +140,7 @@ public class CartViewModel : ViewModelBase
     }
 
 
-    public ICommand OrdersCommand { get; }
-    private void OnOrders()
-    {
-
-        // Navigate to the Orders View page
-        ((App)Application.Current).MainPage.Navigation.PushAsync(serviceProvider.GetService<Orders>());
-    }
+   
+    
 
 }

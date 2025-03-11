@@ -616,6 +616,37 @@ public class ReWearWebAPI
     }
 
 
-    
+    public async Task<List<Product>> GetOrders()
+    {
+        //Set URI to the specific function API
+        string url = $"{this.baseUrl}GetOrders";
+        try
+        {
+            //Call the server API
+            HttpResponseMessage response = await client.GetAsync(url);
+            //Check status
+            if (response.IsSuccessStatusCode)
+            {
+                //Extract the content as string
+                string resContent = await response.Content.ReadAsStringAsync();
+                //Desrialize result
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                List<Product> result = JsonSerializer.Deserialize<List<Product>>(resContent, options);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
+
 
 }

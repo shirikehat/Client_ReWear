@@ -2,9 +2,9 @@ using Client_ReWear.ViewModels;
 
 namespace Client_ReWear.Views;
 
-public partial class Cart : ContentPage
+public partial class CartView : ContentPage
 {
-	public Cart(CartViewModel vm)
+	public CartView(CartViewModel vm)
 	{
         this.BindingContext = vm;
         InitializeComponent();
