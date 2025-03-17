@@ -648,5 +648,51 @@ public class ReWearWebAPI
         }
     }
 
+    public async Task RemoveCart(int cartId)
+    {
+        //Set URI to the specific function API
+        string url = $"{this.baseUrl}RemoveCart?cartId={cartId}";
+        try
+        {
+            //Call the server API
+            HttpResponseMessage response = await client.GetAsync(url);
+            //Check status
+            if (response.IsSuccessStatusCode)
+            {
+                return;
+            }
+            else
+            {
+                return;
+            }
+        }
+        catch (Exception ex)
+        {
+            return;
+        }
+    }
 
+    public async Task RemoveWishlist(int wishlistId)
+    {
+        //Set URI to the specific function API
+        string url = $"{this.baseUrl}RemoveWishlist?wishlistId={wishlistId}";
+        try
+        {
+            //Call the server API
+            HttpResponseMessage response = await client.GetAsync(url);
+            //Check status
+            if (response.IsSuccessStatusCode)
+            {
+                return;
+            }
+            else
+            {
+                return;
+            }
+        }
+        catch (Exception ex)
+        {
+            return;
+        }
+    }
 }
