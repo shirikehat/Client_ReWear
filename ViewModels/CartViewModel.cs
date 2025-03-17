@@ -19,6 +19,7 @@ public class CartViewModel : ViewModelBase
         this.proxy = proxy;
         Carts = new ObservableCollection<Models.Cart>();
         RefreshCommand = new Command(Refresh);
+        Remove= new Command(OnRemove);
         User u = ((App)Application.Current).LoggedInUser;
         User = u;
         IsRefreshing = true;
@@ -139,8 +140,12 @@ public class CartViewModel : ViewModelBase
 
     }
 
+    public ICommand Remove { get; }
+    public void OnRemove()
+    {
 
-   
-    
+    }
+
+
 
 }

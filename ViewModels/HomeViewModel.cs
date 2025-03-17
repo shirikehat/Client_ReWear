@@ -123,4 +123,109 @@ public class HomeViewModel : ViewModelBase
         ReadDataFromServer();
 
     }
+
+    #region filter
+    private string username;
+    public string Username
+    {
+        get => username;
+        set
+        {
+            username = value;
+            Filter();
+            OnPropertyChanged(nameof(Username));
+        }
+    }
+
+    private int maxprice;
+    public int MaxPrice
+    {
+        get => maxprice;
+        set
+        {
+            maxprice = value;
+            Filter();
+            OnPropertyChanged(nameof(MaxPrice));
+        }
+    }
+
+    private string size;
+    public string Size
+    {
+        get => size;
+        set
+        {
+            size = value;
+            Filter();
+            OnPropertyChanged(nameof(Size));
+        }
+    }
+
+    
+    private PrType type;
+    public PrType Type
+    {
+        get { return Type; }
+        set
+        {
+            Type = value;
+            Filter();
+            OnPropertyChanged();
+        }
+    }
+
+
+    private string store;
+    public string Store
+    {
+        get => store;
+        set
+        {
+            store = value;
+            Filter();
+            OnPropertyChanged(nameof(Store));
+        }
+    }
+
+
+    
+
+    private ObservableCollection<Product> filProduct;
+    public ObservableCollection<Product> FilProduct 
+    { get
+        { 
+            return filProduct; 
+        } 
+        set 
+        {
+            filProduct = value; 
+            OnPropertyChanged(); 
+        } 
+    }
+    private void Filter()
+    {
+        FilProduct.Clear();
+        foreach (var product in products)
+        {
+            if (product.UserName== Username)
+                FilProduct.Add(product);
+
+            if (product.Size == Size)
+                FilProduct.Add(product);
+
+            if (product.TypeId == Type.TypeCode)
+                FilProduct.Add(product);
+
+            if (product.Store == Store)
+                FilProduct.Add(product);
+
+            if (product.Price <= MaxPrice)
+                FilProduct.Add(product);
+        }
+    }
+
+    #endregion
+
+
+
 }
