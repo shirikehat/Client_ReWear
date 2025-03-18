@@ -128,7 +128,8 @@ public class ProfileViewModel : ViewModelBase
         set
         {
             this.selectedProduct = value;
-            OnSingleSelectPost(selectedProduct);
+            if (value != null)
+                OnSingleSelectPost(selectedProduct);
             OnPropertyChanged();
         }
     }

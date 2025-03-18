@@ -12,8 +12,6 @@ using Client_ReWear.Services;
 
 namespace Client_ReWear.ViewModels;
 [QueryProperty("Product", "selectedProduct")]
-[QueryProperty("Product", "selectedCart")]
-[QueryProperty("Product", "selectedWishlist")]
 
 public class ProductPageViewModel : ViewModelBase
 {

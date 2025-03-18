@@ -19,12 +19,12 @@
             Text="your cart"
             TextColor="LightPink" />
 
-            
+
             <CollectionView
             ItemsLayout="VerticalGrid, 1"
             ItemsSource="{Binding Carts}"
             SelectedItem="{Binding SelectedCart}"
-            SelectionMode="Single">
+            SelectionMode="Single" x:Name="cv">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Cart">
                         <Grid>
@@ -55,12 +55,27 @@
                             FontFamily="SA"
                             FontSize="30"
                             HorizontalOptions="Start"
-                            Text="{Binding ProductCodeNavigation.Price}" />
+                            Text="{Binding ProductCodeNavigation.Price}"/>
+
+                            <ImageButton
+
+Grid.Column="3"
+Command="{Binding Source={x:Reference cv}, Path=BindingContext.Remove}"
+                                CommandParameter="{Binding}"
+CornerRadius="50"
+HeightRequest="40"
+Source="delete.png"
+WidthRequest="40" />
+
+
 
 
                         </Grid>
 
                     </DataTemplate>
+                    
+
+
                 </CollectionView.ItemTemplate>
                 <CollectionView.EmptyView>
                     <ContentView>
@@ -73,7 +88,7 @@
                                    FontFamily="SA"
                            HorizontalOptions="Fill"
                            HorizontalTextAlignment="Center" />
-                            
+
                         </StackLayout>
                     </ContentView>
                 </CollectionView.EmptyView>

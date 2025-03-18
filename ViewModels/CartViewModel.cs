@@ -19,7 +19,7 @@ public class CartViewModel : ViewModelBase
         this.proxy = proxy;
         Carts = new ObservableCollection<Models.Cart>();
         RefreshCommand = new Command(Refresh);
-        Remove= new Command(OnRemove);
+        Remove= new Command<Cart>(OnRemove);
         User u = ((App)Application.Current).LoggedInUser;
         User = u;
         IsRefreshing = true;
@@ -93,7 +93,11 @@ public class CartViewModel : ViewModelBase
         set
         {
             this.selectedCart = value;
-            OnSingleSelectCart(selectedCart.ProductCodeNavigation);
+            if (value != null)
+            {
+                OnSingleSelectCart(selectedCart.ProductCodeNavigation);
+            }
+            
             OnPropertyChanged();
         }
     }
@@ -106,7 +110,7 @@ public class CartViewModel : ViewModelBase
         {
             var navParam = new Dictionary<string, object>
                 {
-                    {"selectedCart",c }
+                    {"selectedProduct",c }
                 };
             await Shell.Current.GoToAsync("ProductView", navParam);
 
@@ -141,9 +145,19 @@ public class CartViewModel : ViewModelBase
     }
 
     public ICommand Remove { get; }
-    public void OnRemove()
+    public async void OnRemove(Cart c)
     {
 
+        if (c != null)
+        {
+            await this.proxy.RemoveCart(c.CartId);
+            Carts.Remove(c);
+            await Application.Current.MainPage.DisplayAlert("success", "removed product from cart", "ok");
+
+        }
+
+       
+       
     }
 
 

@@ -74,6 +74,7 @@
 	  <None Remove="Resources\Images\blocked.png" />
 	  <None Remove="Resources\Images\cart.png" />
 	  <None Remove="Resources\Images\cart1.png" />
+	  <None Remove="Resources\Images\delete.png" />
 	  <None Remove="Resources\Images\home.png" />
 	  <None Remove="Resources\Images\home1.png" />
 	  <None Remove="Resources\Images\logout.png" />

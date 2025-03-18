@@ -17,6 +17,8 @@ public class HomeViewModel : ViewModelBase
         RefreshCommand = new Command(Refresh);
         IsRefreshing = true;
         Products = new ObservableCollection<Product>();
+        FilteredProducts = new ObservableCollection<Product>();
+        searchText = "";
         ReadDataFromServer();
     }
 
@@ -34,7 +36,6 @@ public class HomeViewModel : ViewModelBase
 
     private async void ReadDataFromServer()
     {
-        LocalPhotoPath = "";
         List<Product>? products = await proxy.GetAllProducts();
 
         if (products != null)
@@ -45,6 +46,7 @@ public class HomeViewModel : ViewModelBase
                 Products.Add(p);
             }
         }
+        Filter();
         IsRefreshing = false;
     }
     #endregion
@@ -52,17 +54,7 @@ public class HomeViewModel : ViewModelBase
 
     
 
-    private string localPhotoPath;
-
-    public string LocalPhotoPath
-    {
-        get => localPhotoPath;
-        set
-        {
-            localPhotoPath = value;
-            OnPropertyChanged("LocalPhotoPath");
-        }
-    }
+    
 
 
     
@@ -125,104 +117,67 @@ public class HomeViewModel : ViewModelBase
     }
 
     #region filter
-    private string username;
-    public string Username
-    {
-        get => username;
-        set
-        {
-            username = value;
-            Filter();
-            OnPropertyChanged(nameof(Username));
-        }
-    }
-
-    private int maxprice;
-    public int MaxPrice
-    {
-        get => maxprice;
-        set
-        {
-            maxprice = value;
-            Filter();
-            OnPropertyChanged(nameof(MaxPrice));
-        }
-    }
-
-    private string size;
-    public string Size
-    {
-        get => size;
-        set
-        {
-            size = value;
-            Filter();
-            OnPropertyChanged(nameof(Size));
-        }
-    }
+    
 
     
-    private PrType type;
-    public PrType Type
+
+    
+    
+
+    private ObservableCollection<Product> filteredProducts;
+    public ObservableCollection<Product> FilteredProducts
     {
-        get { return Type; }
+        get => filteredProducts;
         set
         {
-            Type = value;
+            filteredProducts = value;
+            OnPropertyChanged();
+        }
+    }
+
+    //Search bar text
+    private string searchText;
+    public string SearchText
+    {
+        get => searchText;
+        set
+        {
+            searchText = value;
             Filter();
             OnPropertyChanged();
         }
     }
 
-
-    private string store;
-    public string Store
-    {
-        get => store;
-        set
-        {
-            store = value;
-            Filter();
-            OnPropertyChanged(nameof(Store));
-        }
-    }
-
-
-    
-
-    private ObservableCollection<Product> filProduct;
-    public ObservableCollection<Product> FilProduct 
-    { get
-        { 
-            return filProduct; 
-        } 
-        set 
-        {
-            filProduct = value; 
-            OnPropertyChanged(); 
-        } 
-    }
+    //this method filter the products based on the search text 
     private void Filter()
     {
-        FilProduct.Clear();
-        foreach (var product in products)
+        try
         {
-            if (product.UserName== Username)
-                FilProduct.Add(product);
+            filteredProducts.Clear();
+            //Sort the tasks by urgency level
+            products.OrderByDescending(p => p.ProductCode);
+            int maxPrice = 0;
 
-            if (product.Size == Size)
-                FilProduct.Add(product);
+            int.TryParse(searchText, out maxPrice);
+            foreach (var product in products)
+            {
+                if (product.Size.Contains(SearchText) || product.Store.Contains(SearchText) ||
+                    product.UserName.Contains(SearchText) || /*product.TypeId== PrType.TypeCode ||*/
+                    product.Price <= maxPrice || string.IsNullOrEmpty(SearchText))
+                {
 
-            if (product.TypeId == Type.TypeCode)
-                FilProduct.Add(product);
-
-            if (product.Store == Store)
-                FilProduct.Add(product);
-
-            if (product.Price <= MaxPrice)
-                FilProduct.Add(product);
+                    FilteredProducts.Add(product);
+                }
+            }
         }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        
+
     }
+
 
     #endregion
 

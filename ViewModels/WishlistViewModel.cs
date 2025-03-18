@@ -17,6 +17,7 @@ public class WishlistViewModel : ViewModelBase
         this.proxy = proxy;
         Wishlists = new ObservableCollection<Wishlist>();
         RefreshCommand = new Command(Refresh);
+        Remove = new Command<Wishlist>(OnRemove);
         User u = ((App)Application.Current).LoggedInUser;
         User = u;
         IsRefreshing = true;
@@ -88,7 +89,8 @@ public class WishlistViewModel : ViewModelBase
         set
         {
             this.selectedWishlist = value;
-            OnSingleSelectWishlist(selectedWishlist.ProductCodeNavigation);
+            if (value != null)
+                OnSingleSelectWishlist(selectedWishlist.ProductCodeNavigation);
             OnPropertyChanged();
         }
     }
@@ -101,11 +103,11 @@ public class WishlistViewModel : ViewModelBase
         {
             var navParam = new Dictionary<string, object>
                 {
-                    {"selectedWishlist",w }
+                    {"selectedProduct",w }
                 };
             await Shell.Current.GoToAsync("ProductView", navParam);
 
-            selectedWishlist = null;
+            SelectedWishlist = null;
 
         }
     }
@@ -133,5 +135,16 @@ public class WishlistViewModel : ViewModelBase
 
     }
 
+    public ICommand Remove { get; }
+    public async void OnRemove(Wishlist w)
+    {
+        if (w != null)
+        {
+            await this.proxy.RemoveWishlist(w.WishlistId);
+            Wishlists.Remove(w);
 
+            await Application.Current.MainPage.DisplayAlert("success", "removed product from wishlist", "ok");
+        }
+
+    }
 }

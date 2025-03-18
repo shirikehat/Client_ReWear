@@ -17,27 +17,13 @@ Text="home page"
 TextColor="LightPink" />
 
 
-            <Label Text="Filter by..." 
-               TextColor="LightPink" 
-               FontSize="22" 
-               FontAttributes="Bold"
-                   FontFamily="SA"
-               HorizontalOptions="Center" 
-               Padding="10,5" />
-
-            <Picker Title="Select Size" 
-                ItemsSource="{Binding Size}" 
-                SelectedItem="{Binding Size}"  
-                ItemDisplayBinding="{Binding Name}" 
-                FontFamily="SA"
-                FontSize="16"
-                HorizontalOptions="FillAndExpand"
-                Margin="20,5"/>
+            <SearchBar Placeholder="Search products" 
+               Text="{Binding SearchText}" FontFamily="SA"/>
 
             <CollectionView
     ItemsLayout="VerticalGrid, 2"
     
-    ItemsSource="{Binding Products}"
+    ItemsSource="{Binding FilteredProducts}"
     SelectedItem="{Binding SelectedProduct}"
     SelectionMode="Single"
     

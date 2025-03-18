@@ -22,7 +22,7 @@
             ItemsLayout="VerticalGrid, 1"
             ItemsSource="{Binding Wishlists}"
             SelectedItem="{Binding SelectedWishlist}"
-            SelectionMode="Single">
+            SelectionMode="Single" x:Name="cv">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Wishlist">
                     <Grid>
@@ -54,7 +54,17 @@
                             FontSize="30"
                             HorizontalOptions="Start"
                             Text="{Binding ProductCodeNavigation.Price}" />
-                    </Grid>
+
+                            <ImageButton
+
+Grid.Column="3"
+Command="{Binding Source={x:Reference cv}, Path=BindingContext.Remove}"
+                                CommandParameter="{Binding}"
+CornerRadius="50"
+HeightRequest="40"
+Source="delete.png"
+WidthRequest="40" />
+                        </Grid>
 
                 </DataTemplate>
             </CollectionView.ItemTemplate>
