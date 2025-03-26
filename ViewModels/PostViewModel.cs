@@ -19,6 +19,11 @@ public class PostViewModel : ViewModelBase
         UploadPhotoCommand = new Command(OnUploadPhoto);
         PhotoURL = proxy.GetDefaultProductPhotoUrl();
         LocalPhotoPath = "";
+        DescriptionError = "Description is required";
+        PriceError = "Price is required";
+        StoreError = "Store is required";
+        SizeError = "Size is required";
+
     }
 
     #region Description
@@ -323,12 +328,19 @@ public class PostViewModel : ViewModelBase
             else
             {
 
-                //If the registration failed, display an error message
+                //If the posting failed, display an error message
                 string errorMsg = "Posting Product failed. Please try again.";
                 await Application.Current.MainPage.DisplayAlert("Posting Product", errorMsg, "ok");
             }
 
 
+        }
+        else
+        {
+
+            //If the posting failed, display an error message
+            string errorMsg = "Posting Product failed. Please try again.";
+            await Application.Current.MainPage.DisplayAlert("Posting Product", errorMsg, "ok");
         }
     }
 

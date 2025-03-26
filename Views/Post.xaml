@@ -1,11 +1,162 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodel="clr-namespace:Client_ReWear.ViewModels"
-             x:Class="Client_ReWear.Views.Post"
-             Title="Post"
-             x:DataType="viewmodel:PostViewModel">
-    
-   
-    
+<ContentPage
+    x:Class="Client_ReWear.Views.Post"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:Client_ReWear.ViewModels"
+    Title="Post"
+    x:DataType="viewmodel:PostViewModel">
+
+    <StackLayout>
+        <Label
+            FontFamily="Klhamer"
+            FontSize="50"
+            HorizontalOptions="Center"
+            Text="Post a product"
+            TextColor="LightPink" />
+        <Grid>
+            <VerticalStackLayout Padding="20" IsEnabled="{Binding NotInServerCall}">
+
+
+                <!--  Photo  -->
+                <Frame
+                    Margin="10"
+                    Padding="5"
+                    BorderColor="Black">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            x:Name="theImageBug"
+                            HeightRequest="150"
+                            Source="{Binding PhotoURL}" />
+                        <Label
+                            Grid.Row="1"
+                            FontFamily="SA"
+                            HorizontalOptions="Center"
+                            Text="Click Here To Upload Photo!"
+                            TextColor="Blue"
+                            VerticalOptions="End">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding UploadPhotoCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </Frame>
+
+
+                <!--  User Name  -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Text="Price" />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        IsVisible="{Binding ShowPriceError}"
+                        Text="{Binding PriceError}" />
+                    <Entry
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Placeholder="Type price"
+                        Text="{Binding Price}" />
+
+
+
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Text="Size" />
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        IsVisible="{Binding ShowSizeError}"
+                        Text="{Binding SizeError}" />
+                    <Entry
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Placeholder="Type Size"
+                        Text="{Binding Size}" />
+
+
+
+                    <Label
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        Text="Store" />
+                    <Label
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        IsVisible="{Binding ShowStoreError}"
+                        Text="{Binding StoreError}" />
+                    <Entry
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Placeholder="Type Store"
+                        Text="{Binding Store}" />
+
+
+                    <Label
+                        Grid.Row="6"
+                        Grid.Column="0"
+                        Text="Description" />
+                    <Label
+                        Grid.Row="6"
+                        Grid.Column="1"
+                        IsVisible="{Binding ShowDescError}"
+                        Text="{Binding DescriptionError}" />
+                    <Entry
+                        Grid.Row="7"
+                        Grid.Column="1"
+                        Placeholder="Type Description"
+                        Text="{Binding Description}" />
+
+                </Grid>
+
+
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="Type" />
+                    <Picker
+                        Grid.Column="1"
+                        ItemDisplayBinding="{Binding Name}"
+                        ItemsSource="{Binding PrTypes}"
+                        SelectedItem="{Binding SelectedType}" />
+                </Grid>
+
+                <Button
+                    Command="{Binding CreateCommand}"
+                    FontFamily="SA"
+                    IsEnabled="{Binding NotInServerCall}"
+                    Text="Post" />
+
+
+            </VerticalStackLayout>
+        </Grid>
+    </StackLayout>
+
 </ContentPage>
